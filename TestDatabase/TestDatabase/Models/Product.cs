@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CsvHelper.Configuration;
 using SQLite;
 
 
@@ -15,9 +16,13 @@ namespace TestDatabase.Models
           [MaxLength(250),Unique]
           public string Name { get; set; }
 
-          [MaxLength(250), Unique]
+          [MaxLength(250)]
           public string Description { get; set; }
           
+
+          [MaxLength(250)]
+          public string Category { get; set; }
+
           [MaxLength(250)]
           public string Department { get; set; }
 
@@ -41,4 +46,22 @@ namespace TestDatabase.Models
 
 
      }
+
+
+    public class ProductMap : ClassMap<Product>
+     {
+          public ProductMap()
+          {
+               Map(m => m.Description).Name("Article Description");
+               Map(m => m.Category).Name("Category");
+               Map(m => m.Department).Name("Department");
+               Map(m => m.Date).Name("Date of Sale");
+               Map(m => m.Quantity).Name("Sold Quantity");
+               Map(m => m.TotalSale).Name("Total Sales");
+          }
+     }
+
+
 }
+
+
