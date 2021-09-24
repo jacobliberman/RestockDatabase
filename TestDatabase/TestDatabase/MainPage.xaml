@@ -22,6 +22,9 @@
                 Grid.ColumnSpan="3"
                 Clicked="OnFileUploadButtonClicked" />
 
+        <Button x:Name="deleteAll"
+                Text="Delete All Entries"
+                Clicked="OnDeleteAllButtonClicked" /> 
 
         <Entry x:Name="newProduct"
            Placeholder="Enter name" 
@@ -42,6 +45,8 @@
         <Label x:Name="statusMessage" Grid.ColumnSpan="3"
            Grid.Row="4" />
 
+        
+        
         <Button Text="Get All Products"
             Grid.Row="5" Grid.ColumnSpan="3"
             Clicked="OnGetButtonClicked" />
@@ -52,9 +57,9 @@
                 <DataTemplate>
                     <ViewCell Height="30">
                         <Grid Padding="5">
-                            <Label Text="{Binding Name}" />
-                            <Label Grid.Column="1" Text="{Binding Description}" />
-                            <Label Grid.Column="2" Text="{Binding Price}" HorizontalTextAlignment="End" />
+                            <Label Text="{Binding Description}" />
+                            <Label Grid.Column="1" Text="{Binding Department}" />
+                            <Label Grid.Column="2" Text="{Binding Quantity}" HorizontalTextAlignment="End" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
