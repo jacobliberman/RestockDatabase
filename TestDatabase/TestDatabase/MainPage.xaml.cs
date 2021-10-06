@@ -1,52 +1,49 @@
-﻿using TestDatabase.Models;
-using System;
-using Xamarin.Forms;
-using System.Collections.Generic;
-using System.IO;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
-using CsvHelper;
-using System.Globalization;
+﻿using CsvHelper;
 using CsvHelper.Configuration;
-using SQLite;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using TestDatabase.Models;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace TestDatabase
 {
-    public partial class MainPage : ContentPage
-    {
-        public MainPage()
-        {
-            InitializeComponent();
-        }
+     public partial class MainPage : ContentPage
+     {
+          public MainPage()
+          {
+               InitializeComponent();
+          }
 
-        /// <summary>
-        ///  Adds new product to SQLite Table on button press
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        public async void OnNewButtonClicked(object sender, EventArgs args)
-        {
-            statusMessage.Text = "";
+          /// <summary>
+          ///  Adds new product to SQLite Table on button press
+          /// </summary>
+          /// <param name="sender"></param>
+          /// <param name="args"></param>
+          public async void OnNewButtonClicked(object sender, EventArgs args)
+          {
+               statusMessage.Text = "";
 
 
                await App.ProductRepo.AddNewProduct(newProduct.Text, newDesc.Text, Convert.ToDouble(newPrice.Text));
-             
-            statusMessage.Text = App.ProductRepo.StatusMessage;
-        }
+
+               statusMessage.Text = App.ProductRepo.StatusMessage;
+          }
 
           /// <summary>
           /// Gets and prints list of products in database 
           /// </summary>
           /// <param name="sender"></param>
           /// <param name="args"></param>
-        public async void OnGetButtonClicked(object sender, EventArgs args)
-        {
-            statusMessage.Text = "";
+          public async void OnGetButtonClicked(object sender, EventArgs args)
+          {
+               statusMessage.Text = "";
 
-            List<Product> products = await App.ProductRepo.GetAllProducts();
-            productsList.ItemsSource = products;
-               
+               List<Product> products = await App.ProductRepo.GetAllProducts();
+               productsList.ItemsSource = products;
+
           }
 
           /// <summary>
@@ -78,7 +75,7 @@ namespace TestDatabase
 
           }
 
-         private async void OnFileUploadButtonClicked(object sender, EventArgs args)
+          private async void OnFileUploadButtonClicked(object sender, EventArgs args)
           {
                statusMessage.Text = "";
 
@@ -99,7 +96,7 @@ namespace TestDatabase
 
 
 
-                         using (var reader = new StreamReader(result.FullPath)) 
+                         using (var reader = new StreamReader(result.FullPath))
                          using (var csv = new CsvReader(reader, config))
                          {
                               //string title = reader.ReadLine();
@@ -120,12 +117,12 @@ namespace TestDatabase
 
                               csv.Context.RegisterClassMap<NewProductMap>();
                               var records = csv.GetRecords<Product>();
-                        
+
                               foreach (Product prod in records)
                               {
                                    Console.WriteLine($"!!!!{prod.Description}!!!!");
                                    //await App.ProductRepo.AddNewProduct(prod.Description, prod.Category, prod.Department, prod.Date, prod.Quantity, prod.TotalWithoutTax, prod.SaleHour);
-                                   await App.ProductRepo.AddNewProduct(prod.Description, prod.Quantity, prod.TotalSale, prod.TotalWithoutTax, prod.Category, prod.Department);
+                                   await App.ProductRepo.AddNewProduct(prod.Description, prod.Quantity, prod.Price);
 
 
                               }
@@ -143,8 +140,8 @@ namespace TestDatabase
                     statusMessage.Text = ex.Message;
                     Console.Write(ex.Message);
                }
-               
+
           }
-     
-    }
+
+     }
 }

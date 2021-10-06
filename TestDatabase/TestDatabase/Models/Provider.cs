@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CsvHelper.Configuration;
-using SQLite;
+﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
+using System.Collections.Generic;
 
 
 namespace TestDatabase.Models
@@ -15,12 +12,12 @@ namespace TestDatabase.Models
           [PrimaryKey]
           public string Name { get; set; }
 
-          public string ID{ get; set; }
+          public string ID { get; set; }
 
           public List<Product> ProductsSupplied { get; set; }
 
           [ManyToMany(typeof(Supplies))]
-          public List<Product> Products{ get; set; }
+          public List<Product> Products { get; set; }
 
      }
 }
