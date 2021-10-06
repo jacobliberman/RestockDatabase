@@ -115,7 +115,7 @@ namespace TestDatabase
           }
           public void DeleteProduct(Product delete) {
             //ToDO
-            conn.DeleteAsync<Product>(delete.Key);
+            conn.DeleteAsync<Product>(delete.ID);
                return;
           }
 
