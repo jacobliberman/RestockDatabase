@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using CsvHelper.Configuration;
 using SQLite;
-
+using SQLiteNetExtensions.Attributes;
 
 namespace TestDatabase.Models
 {
@@ -41,12 +41,15 @@ namespace TestDatabase.Models
 
           public int Key { get; set; }
 
-
           public string TotalWithoutTax { get;set; }
 
           public string SaleHour { get; set; }
 
-          public Provider ProvidedBy { get; set; }
+          
+          //public Provider ProvidedBy { get; set; }
+
+          [ManyToMany(typeof(Supplies))]
+          public List<Provider> Providers{ get; set; }
 
      }
 
@@ -77,6 +80,7 @@ namespace TestDatabase.Models
                Map(m => m.TotalSale).Name("Total Sales");
                Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
                Map(m => m.SaleHour).Name("Sale hour");
+              // Map(m => m.ProvidedBy).Name("Provider");
           }
      }
 

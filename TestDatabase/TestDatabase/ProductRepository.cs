@@ -14,7 +14,7 @@ namespace TestDatabase
           public ProductRepository(string dbPath)
           {
                conn = new SQLiteAsyncConnection(dbPath);
-               conn.CreateTableAsync<Product>();
+               conn.CreateTableAsync<Product>().Wait();
           }
       
           public async Task AddNewProduct(string name, string desc, double price)
@@ -40,7 +40,7 @@ namespace TestDatabase
 
           }
 
-          public async Task AddNewProduct(string desc, string category, string department, string date, string soldQuantity, string totalNoTax,string hour)
+        /*  public async Task AddNewProduct(string desc, string category, string department, string date, string soldQuantity, string totalNoTax,string hour)
           {
                int result = 0;
                try
@@ -68,7 +68,7 @@ namespace TestDatabase
                     StatusMessage = string.Format("Failed to add {0}. Error: {1}", desc, ex.Message);
                }
           }
-
+        */
 
           public async Task AddNewProduct(string desc, string quantity, string totalSale, string totalNoTax, string cat, string dept)
           {
