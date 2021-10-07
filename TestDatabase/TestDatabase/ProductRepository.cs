@@ -14,8 +14,12 @@ namespace TestDatabase
           public ProductRepository(SQLiteAsyncConnection conn)
           {
                this.conn = conn;
+               
+               // ***************** UNCOMMENT TO CLEAR TABLE ON REBOOT *********************
+               //conn.DropTableAsync<Product>().Wait(); 
+               
                //conn = new SQLiteAsyncConnection(dbPath);
-               conn.CreateTableAsync<Product>().Wait();
+               conn.CreateTableAsync<Product>();
           }
 
           public async Task AddNewProduct(string name, string desc, double price)

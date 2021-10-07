@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestDatabase.ProviderPage"
+             Title="Provider">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="newProviderName"
+           Placeholder="Enter Provider Name" />
+
+            <Entry x:Name="newProviderId"
+               Placeholder="Enter Provider Id" />
+           
+
+            <Button x:Name="addProvider"
+                Text="Add Provider"
+                Clicked="OnNewButtonClicked" /> 
+
+       <Label x:Name="statusMessage" />
+
+
+            <Button Text="Get All Providers"
+            Clicked="OnGetButtonClicked" />
+
+            <ListView x:Name="providerList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="30">
+                            <Grid Padding="5">
+                                <Label Text="{Binding Name}" />
+                            <Label Grid.Column="1" Text="{Binding ID}"  HorizontalTextAlignment="End" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

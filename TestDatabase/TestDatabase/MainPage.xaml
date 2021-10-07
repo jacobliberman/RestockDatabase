@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TestDatabase.MainPage"
-    Padding="0,20">
+    Padding="0,20"
+    Title="Product">
 
     <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" BackgroundColor="White">
 

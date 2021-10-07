@@ -14,7 +14,7 @@ namespace TestDatabase.Models
 
           public string ID { get; set; }
 
-          public List<Product> ProductsSupplied { get; set; }
+        
 
           [ManyToMany(typeof(Supplies))]
           public List<Product> Products { get; set; }

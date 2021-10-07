@@ -7,6 +7,9 @@ namespace TestDatabase
      {
           string dbPath => FileAccessHelper.GetLocalFilePath("products.db3");
           public static ProductRepository ProductRepo { get; private set; }
+          public static ProviderRepository ProviderRepo { get; private set; }
+          public static SuppliesRepository SuppliesRepo { get; private set; }
+
           private SQLiteAsyncConnection conn;
           public App()
           {
@@ -14,7 +17,19 @@ namespace TestDatabase
 
                conn = new SQLiteAsyncConnection(dbPath);
                ProductRepo = new ProductRepository(conn);
-               MainPage = new MainPage();
+               ProviderRepo = new ProviderRepository(conn);
+               SuppliesRepo = new SuppliesRepository(conn);
+
+               
+               var tabbedPage = new tPage();
+
+               //tabbedPage.Children.Add(new MainPage());
+              
+
+               MainPage = tabbedPage;
+
+
+               //MainPage = new MainPage();
           }
 
           protected override void OnStart()

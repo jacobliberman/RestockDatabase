@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestDatabase.Models;
+using SQLiteNetExtensions.Attributes;
+using SQLiteNetExtensionsAsync;
+using SQLiteNetExtensions;
 
 namespace TestDatabase
 {
@@ -14,10 +17,10 @@ namespace TestDatabase
           {
                this.conn = conn;
                //conn = new SQLiteAsyncConnection(dbPath);
-               conn.CreateTableAsync<Provider>().Wait();
+               conn.CreateTableAsync<Provider>();
           }
 
-          public async Task AddNewProvider(string name, int id)
+          public async Task AddNewProvider(string name, string id)
           {
                int result = 0;
                try
@@ -26,7 +29,7 @@ namespace TestDatabase
                     if (string.IsNullOrEmpty(name))
                          throw new Exception("Valid name required");
 
-                    result = await conn.InsertAsync(new Product { Name = name, ID = id });
+                    result = await conn.InsertAsync(new Provider { Name = name, ID = id });
 
                     StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
                }
@@ -38,7 +41,7 @@ namespace TestDatabase
 
           }
 
-          public async Task<List<Provider>> GetAllProvider()
+          public async Task<List<Provider>> GetAllProviders()
           {
                try
                {
