@@ -30,7 +30,7 @@ namespace TestDatabase
             statusMessage.Text = "";
 
 
-               await App.ProductRepo.AddNewProduct(newProduct.Text, newDesc.Text, Convert.ToDouble(newPrice.Text));
+               //await App.ProductRepo.AddNewProduct(newProduct.Text, newID.Text, Convert.ToDouble(newID.Text));
              
             statusMessage.Text = App.ProductRepo.StatusMessage;
         }

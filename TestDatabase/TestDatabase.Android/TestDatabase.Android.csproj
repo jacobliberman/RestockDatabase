@@ -16,7 +16,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -95,7 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TestDatabase\TestDatabase.csproj">
-      <Project>{816DE25A-296C-4FC0-8404-C22AAF4694FD}</Project>
+      <Project>{F32E7BA8-5A7B-4750-93C6-DC65CFA2B927}</Project>
       <Name>TestDatabase</Name>
     </ProjectReference>
   </ItemGroup>

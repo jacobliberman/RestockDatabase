@@ -4,7 +4,7 @@
     x:Class="TestDatabase.MainPage"
     Padding="0,20">
 
-    <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" BackgroundColor="White">
+    <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" BackgroundColor="LightSkyBlue">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -29,8 +29,8 @@
         <Entry x:Name="newProduct"
            Placeholder="Enter name" 
                Grid.Row="1"/>
-        <Entry x:Name="newDesc"
-               Placeholder="Enter description" 
+        <Entry x:Name="newID"
+               Placeholder="Enter new product ID" 
                Grid.Column="1"
                Grid.Row="1"/>
         <Entry x:Name="newPrice"
