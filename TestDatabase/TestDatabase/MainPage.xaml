@@ -59,8 +59,8 @@
                     <ViewCell Height="30">
                         <Grid Padding="5">
                             <Label Text="{Binding Name}" />
-                            <Label Grid.Column="1" Text="{Binding Description}" />
-                            <Label Grid.Column="2" Text="{Binding Price}" HorizontalTextAlignment="End" />
+                            <Label Grid.Column="1" Text="{Binding ID}" />
+                            <Label Grid.Column="2" Text="{Binding Providers}" HorizontalTextAlignment="End" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

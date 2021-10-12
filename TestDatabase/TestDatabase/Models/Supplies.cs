@@ -2,15 +2,15 @@
 
 namespace TestDatabase.Models
 {
-     class Supplies
+     public class Supplies
      {
 
           [ForeignKey(typeof(Provider))]
-          public int ProviderID { get; set; }
+          public string ProviderID { get; set; }
 
 
           [ForeignKey(typeof(Product))]
-          public int ProductID { get; set; }
+          public string ProductID { get; set; }
 
      }
 }

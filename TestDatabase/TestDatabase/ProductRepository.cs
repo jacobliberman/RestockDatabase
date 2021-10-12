@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestDatabase.Models;
+using SQLiteNetExtensionsAsync.Extensions;
 
 namespace TestDatabase
 {
@@ -35,6 +36,29 @@ namespace TestDatabase
 
 
                     result = await conn.InsertAsync(new Product { Name = name, Description = desc, Price = price });
+
+                    StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
+               }
+               catch (Exception ex)
+               {
+                    StatusMessage = string.Format("Failed to add {0}. Error: {1}", name, ex.Message);
+               }
+
+          }
+
+          public async Task AddNewProduct(string name, string Id)
+          {
+               int result = 0;
+               try
+               {
+                    //basic validation to ensure a name was entered
+                    if (string.IsNullOrEmpty(name))
+                         throw new Exception("Valid name required");
+                    if (string.IsNullOrEmpty(Id))
+                         throw new Exception("Valid ID required");
+
+
+                    result = await conn.InsertAsync(new Product { Name = name, ID=Id });
 
                     StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
                }
@@ -99,13 +123,24 @@ namespace TestDatabase
           */
 
 
-
+          public async Task AddProvider(Product prod, Provider prov){
+               try
+               {
+                    prod.Providers.Add(prov);
+                    await conn.UpdateWithChildrenAsync(prod);
+               }
+               catch (Exception ex)
+               {
+                    StatusMessage = string.Format("Failed to Add Provider {0} to Product {1}", prov, prod);
+               }
+          }
 
           public async Task<List<Product>> GetAllProducts()
           {
                try
                {
-                    return await conn.Table<Product>().ToListAsync();
+                    return await conn.GetAllWithChildrenAsync<Product>();
+                    //return await conn.Table<Product>().ToListAsync();
                }
                catch (Exception ex)
                {

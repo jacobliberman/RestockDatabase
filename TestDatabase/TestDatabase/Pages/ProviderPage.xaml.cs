@@ -38,6 +38,7 @@ namespace TestDatabase
 
                List<Provider> providers = await App.ProviderRepo.GetAllProviders();
                providerList.ItemsSource = providers;
+               
 
           }
      }

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestDatabase.SuppliesPage"
+             Title="Supplies">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="productId"
+           Placeholder="Enter Product Id" />
+
+            <Entry x:Name="providerId"
+               Placeholder="Enter Provider Id" />
+
+
+            <Button x:Name="addRelation"
+                Text="Add Supplies"
+                Clicked="OnNewButtonClicked" />
+
+
+            <Label x:Name="testMessage" />
+
+            <Label x:Name="statusMessage" />
+            
+            
+
+            <Button Text="Get All Supplies"
+                    Clicked="OnSuppliesGetButtonClicked" />
+
+            <Entry x:Name="searchProductId"
+                   Placeholder="Enter product Id to search for"/>
+            <Button Text="Search Supplies"
+                    Clicked="OnSearchButtonClicked"/>
+            
+            
+            
+
+            <ListView x:Name="suppliesList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="30">
+                            <Grid Padding="5">
+                                <Label Text="{Binding ProviderID}" />
+                                <Label Grid.Column="1" Text="{Binding ProductID}"  HorizontalTextAlignment="End" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+    

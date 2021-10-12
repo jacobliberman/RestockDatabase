@@ -17,6 +17,7 @@ namespace TestDatabase
                InitializeComponent();
                this.Children.Add(new MainPage());
                this.Children.Add(new ProviderPage());
+               this.Children.Add(new SuppliesPage());
           }
      }
 }

@@ -10,7 +10,7 @@ namespace TestDatabase
           public static ProviderRepository ProviderRepo { get; private set; }
           public static SuppliesRepository SuppliesRepo { get; private set; }
 
-          private SQLiteAsyncConnection conn;
+          public static SQLiteAsyncConnection conn { get; private set; }
           public App()
           {
                InitializeComponent();
