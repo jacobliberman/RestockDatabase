@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Xamarin.Forms.Xaml;
+using TestDatabase.Pages;
 
 namespace TestDatabase
 {
@@ -18,7 +19,8 @@ namespace TestDatabase
 
                ProductRepo = new ProductRepository(dbPath);
 
-               MainPage = new MainPage();
+            MainPage = new MainPage();
+
           }
 
           protected override void OnStart()
