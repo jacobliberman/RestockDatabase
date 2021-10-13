@@ -50,7 +50,7 @@ namespace TestDatabase.Models
           //public Provider ProvidedBy { get; set; }
 
           [ManyToMany(typeof(Supplies))]
-          public List<Provider> Providers { get; set; }
+          public List<Provider> Providers { get; set; } = new List<Provider>();
 
      }
 

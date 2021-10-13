@@ -129,13 +129,15 @@ namespace TestDatabase
                     try
                     {
                          prod.Providers.Add(prov);
+                         await conn.UpdateWithChildrenAsync(prod);
+                         StatusMessage = string.Format("Added Provider {0} to Product {1}", prov, prod);
                     }
                     catch (Exception ex)
                     {
                          StatusMessage = string.Format("Could not add provider");
                     }
-                    await conn.UpdateWithChildrenAsync(prod);
-                    StatusMessage = string.Format("Added Provider {0} to Product {1}", prov, prod);
+                    
+                   
                }
                catch (Exception ex)
                {

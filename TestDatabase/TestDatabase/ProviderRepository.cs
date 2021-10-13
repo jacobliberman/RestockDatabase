@@ -17,6 +17,7 @@ namespace TestDatabase
           {
                this.conn = conn;
                //conn = new SQLiteAsyncConnection(dbPath);
+               //conn.DropTableAsync<Provider>().Wait();
                conn.CreateTableAsync<Provider>();
           }
 
@@ -29,9 +30,16 @@ namespace TestDatabase
                     if (string.IsNullOrEmpty(name))
                          throw new Exception("Valid name required");
 
-                    result = await conn.InsertAsync(new Provider { Name = name, ID = id });
+                    try
+                    {
+                         result = await conn.InsertAsync(new Provider { Name = name, ID = id });
+                         StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
 
-                    StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
+                    }
+                    catch (SQLiteException ex)
+                    {
+                         StatusMessage = string.Format("Failed to Add Provider. Provider with ID \"{0}\" already exists ",id); 
+                    }
                }
                catch (Exception ex)
                {

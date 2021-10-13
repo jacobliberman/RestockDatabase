@@ -20,6 +20,7 @@ namespace TestDatabase
           public ProviderPage()
           {
                InitializeComponent();
+               
           }
 
           public async void OnNewButtonClicked(object sender, EventArgs args)
@@ -29,7 +30,7 @@ namespace TestDatabase
 
                await App.ProviderRepo.AddNewProvider(newProviderName.Text, newProviderId.Text);
 
-               statusMessage.Text = App.ProductRepo.StatusMessage;
+               statusMessage.Text = App.ProviderRepo.StatusMessage;
           }
 
           public async void OnGetButtonClicked(object sender, EventArgs args)

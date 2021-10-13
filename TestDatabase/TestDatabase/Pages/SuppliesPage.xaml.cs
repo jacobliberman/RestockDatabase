@@ -7,6 +7,7 @@ using System.IO;
 using TestDatabase.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using SQLiteNetExtensionsAsync.Extensions;
 
 
 
@@ -20,22 +21,50 @@ namespace TestDatabase
           public SuppliesPage()
           {
                InitializeComponent();
+               
           }
 
           public async void OnNewButtonClicked(object sender, EventArgs args)
           {
                statusMessage.Text = "";
+               Provider prov = null;
+               Product prod = null;
+               
+            
+               try
+               {
+                    prod = await App.conn.GetWithChildrenAsync<Product>(productId.Text);
+
+               }
+               catch (Exception ex)
+               {
+                    testMessage.Text = string.Format("Could not Find Product. {0}", ex);
+               }
+
+               try
+               {
+                    prov = await App.conn.GetWithChildrenAsync<Provider>(providerId.Text);
+
+               }
+               catch (Exception ex)
+               {
+                    testMessage.Text = string.Format("Could not Find Provider. {0}", ex);
+               }
 
 
-               Product prod = await App.conn.GetAsync<Product>(productId.Text);
-               Provider prov = await App.conn.GetAsync<Provider>(providerId.Text);
-               await App.ProductRepo.AddProvider(prod, prov);
+               try
+               {
 
+                    await App.ProductRepo.AddProvider(prod, prov);
+               }
+               catch (Exception ex){
+                    testMessage.Text = string.Format("Could not add provider. {0}", ex);
+               }
 
                //await App.SuppliesRepo.AddNewSupplies(providerId.Text, productId.Text);
 
                statusMessage.Text = App.ProductRepo.StatusMessage;
-               testMessage.Text = App.SuppliesRepo.TestMessage;
+               
           }
 
           public async void OnSuppliesGetButtonClicked(object sender, EventArgs args)
