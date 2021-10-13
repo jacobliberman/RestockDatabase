@@ -66,6 +66,7 @@ namespace TestDatabase.Models
 
 
 
+
     public class ProductMap : ClassMap<Product>
      {
           public ProductMap()
