@@ -34,7 +34,7 @@ namespace TestDatabase
 
                //await App.SuppliesRepo.AddNewSupplies(providerId.Text, productId.Text);
 
-               statusMessage.Text = App.SuppliesRepo.StatusMessage;
+               statusMessage.Text = App.ProductRepo.StatusMessage;
                testMessage.Text = App.SuppliesRepo.TestMessage;
           }
 

@@ -126,12 +126,20 @@ namespace TestDatabase
           public async Task AddProvider(Product prod, Provider prov){
                try
                {
-                    prod.Providers.Add(prov);
+                    try
+                    {
+                         prod.Providers.Add(prov);
+                    }
+                    catch (Exception ex)
+                    {
+                         StatusMessage = string.Format("Could not add provider");
+                    }
                     await conn.UpdateWithChildrenAsync(prod);
+                    StatusMessage = string.Format("Added Provider {0} to Product {1}", prov, prod);
                }
                catch (Exception ex)
                {
-                    StatusMessage = string.Format("Failed to Add Provider {0} to Product {1}", prov, prod);
+                    StatusMessage = string.Format("Failed to Add Provider {0} to Product {1}", prov.ID, prod.ID);
                }
           }
 

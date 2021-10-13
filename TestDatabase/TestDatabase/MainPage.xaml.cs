@@ -15,6 +15,7 @@ namespace TestDatabase
           public MainPage()
           {
                InitializeComponent();
+               statusMessage.Text = FileSystem.AppDataDirectory;
           }
 
           /// <summary>
@@ -43,7 +44,14 @@ namespace TestDatabase
 
                List<Product> products = await App.ProductRepo.GetAllProducts();
                productsList.ItemsSource = products;
+               Console.WriteLine("********************THIS IS A TEST LINE************************");
+               //List<string> provs = 
+               //statusMessage.Text = string.Format("{0}", products[0].Providers.ToString());
+               foreach(Product p in products)
+               {
+                    App.ProviderRepo.provToString(p);
 
+               }
           }
 
           /// <summary>

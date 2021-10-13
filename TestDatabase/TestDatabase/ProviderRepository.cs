@@ -64,5 +64,19 @@ namespace TestDatabase
           {
                return conn.DeleteAllAsync<Provider>();
           }
+    
+          public void provToString(Product prod)
+          {
+               List < Provider > provs = prod.Providers;
+               string str ="";
+               
+               foreach (Provider p in provs)
+               {
+                    Console.Write("------------------------------------------------TEST-------------------------");
+               }
+          }
+     
+     
+     
      }
 }
