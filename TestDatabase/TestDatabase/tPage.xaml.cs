@@ -15,7 +15,7 @@ namespace TestDatabase
           public tPage()
           {
                InitializeComponent();
-               this.Children.Add(new MainPage());
+               this.Children.Add(new ProductPage());
                this.Children.Add(new ProviderPage());
                this.Children.Add(new SuppliesPage());
           }

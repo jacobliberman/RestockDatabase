@@ -10,9 +10,9 @@ using Xamarin.Forms;
 
 namespace TestDatabase
 {
-     public partial class MainPage : ContentPage
+     public partial class ProductPage : ContentPage
      {
-          public MainPage()
+          public ProductPage()
           {
                InitializeComponent();
                statusMessage.Text = FileSystem.AppDataDirectory;
