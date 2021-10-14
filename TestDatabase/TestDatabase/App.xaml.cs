@@ -1,11 +1,7 @@
-﻿using System;
+﻿using SQLite;
 using Xamarin.Forms;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Xamarin.Forms.Xaml;
-using TestDatabase.Pages;
 
 namespace TestDatabase
 {
@@ -13,14 +9,29 @@ namespace TestDatabase
      {
           string dbPath => FileAccessHelper.GetLocalFilePath("products.db3");
           public static ProductRepository ProductRepo { get; private set; }
+          public static ProviderRepository ProviderRepo { get; private set; }
+          public static SuppliesRepository SuppliesRepo { get; private set; }
+
+          public static SQLiteAsyncConnection conn { get; private set; }
           public App()
           {
                InitializeComponent();
 
-               ProductRepo = new ProductRepository(dbPath);
+               conn = new SQLiteAsyncConnection(dbPath);
+               ProductRepo = new ProductRepository(conn);
+               ProviderRepo = new ProviderRepository(conn);
+               SuppliesRepo = new SuppliesRepository(conn);
 
-            MainPage = new MainPage();
+               
+               var tabbedPage = new tPage();
 
+               //tabbedPage.Children.Add(new MainPage());
+              
+
+               MainPage = tabbedPage;
+
+
+               //MainPage = new MainPage();
           }
 
           protected override void OnStart()

@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CsvHelper.Configuration;
+﻿using CsvHelper.Configuration;
 using SQLite;
-
+using SQLiteNetExtensions.Attributes;
+using System.Collections.Generic;
 
 namespace TestDatabase.Models
 {
      [Table("product")]
      public class Product
      {
-          [PrimaryKey,AutoIncrement]
-          public int ID { get; set; }
+         
 
-
-          [MaxLength(250)]
+          [PrimaryKey,MaxLength(250), Unique]
           public string Name { get; set; }
 
           [MaxLength(250)]
           public string Description { get; set; }
-          
+
 
           [MaxLength(250)]
           public string Category { get; set; }
@@ -42,23 +38,29 @@ namespace TestDatabase.Models
 
           public int Key { get; set; }
 
+          
+          public int numInStock { get; set; }
+          
+          public int prevSales { get; set; }
 
-          public string TotalWithoutTax { get;set; }
 
           public string SaleHour { get; set; }
 
-          public Provider ProvidedBy { get; set; }
+          //public Provider ProvidedBy { get; set; }
+
+          [ManyToMany(typeof(Supplies))]
+          public List<Provider> Providers { get; set; } = new List<Provider>();
 
      }
 
-          public class NewProductMap : ClassMap<Product>
+     public class NewProductMap : ClassMap<Product>
      {
           public NewProductMap()
           {
                Map(m => m.Description).Name("Description");
                Map(m => m.Quantity).Name("Quantity Sold");
                Map(m => m.TotalSale).Name("Total Sales");
-               Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
+              // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
                Map(m => m.Category).Name("Category");
                Map(m => m.Department).Name("Department");
           }
@@ -66,8 +68,7 @@ namespace TestDatabase.Models
 
 
 
-
-    public class ProductMap : ClassMap<Product>
+     public class ProductMap : ClassMap<Product>
      {
           public ProductMap()
           {
@@ -77,8 +78,9 @@ namespace TestDatabase.Models
                Map(m => m.Date).Name("Date of Sale");
                Map(m => m.Quantity).Name("Sold Quantity");
                Map(m => m.TotalSale).Name("Total Sales");
-               Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
+              // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
                Map(m => m.SaleHour).Name("Sale hour");
+               // Map(m => m.ProvidedBy).Name("Provider");
           }
      }
 

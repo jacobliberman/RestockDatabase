@@ -1,8 +1,7 @@
-﻿using System;
+﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System.Collections.Generic;
-using System.Text;
-using CsvHelper.Configuration;
-using SQLite;
+
 
 namespace TestDatabase.Models
 {
@@ -10,15 +9,18 @@ namespace TestDatabase.Models
      [Table("provider")]
      public class Provider
      {
-          [PrimaryKey]
+          [PrimaryKey, Unique]
           public string Name { get; set; }
+                   
+                 
+          [ManyToMany(typeof(Supplies))]
+          public List<Product> Products { get; set; }
 
 
 
           public string Frequency{ get; set; }
 
    
-          public List<Product> ProductsSupplied { get; set; }
 
      }
 }
