@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestDatabase
 {
+
      public class ProductRepository
      {
           public string StatusMessage { get; set; }

@@ -13,6 +13,7 @@ namespace TestDatabase.Models
           [PrimaryKey,AutoIncrement]
           public int ID { get; set; }
 
+
           [MaxLength(250)]
           public string Name { get; set; }
 
@@ -62,6 +63,7 @@ namespace TestDatabase.Models
                Map(m => m.Department).Name("Department");
           }
      }
+
 
 
 
