@@ -46,7 +46,7 @@ namespace TestDatabase
 
           }
 
-          public async Task AddNewProduct(string name, string Id)
+          public async Task AddNewProduct(string name)
           {
                int result = 0;
                try
@@ -54,11 +54,10 @@ namespace TestDatabase
                     //basic validation to ensure a name was entered
                     if (string.IsNullOrEmpty(name))
                          throw new Exception("Valid name required");
-                    if (string.IsNullOrEmpty(Id))
-                         throw new Exception("Valid ID required");
+             
 
 
-                    result = await conn.InsertAsync(new Product { Name = name, ID=Id });
+                    result = await conn.InsertAsync(new Product { Name = name});
 
                     StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
                }
@@ -141,7 +140,7 @@ namespace TestDatabase
                }
                catch (Exception ex)
                {
-                    StatusMessage = string.Format("Failed to Add Provider {0} to Product {1}", prov.ID, prod.ID);
+                    StatusMessage = string.Format("Failed to Add Provider {0} to Product {1}", prov.Name, prod.Name);
                }
           }
 
@@ -161,7 +160,7 @@ namespace TestDatabase
           public void DeleteProduct(Product delete)
           {
                //ToDO
-               conn.DeleteAsync<Product>(delete.ID);
+               conn.DeleteAsync<Product>(delete.Name);
                return;
           }
 

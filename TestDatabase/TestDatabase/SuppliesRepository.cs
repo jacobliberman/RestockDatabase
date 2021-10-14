@@ -19,7 +19,7 @@ namespace TestDatabase
                conn.CreateTableAsync<Supplies>().Wait();
           }
 
-          public async Task AddNewSupplies(string providerid, string productid)
+          public async Task AddNewSupplies(string providerName, string productName)
           {
                int result = 0;
                try
@@ -29,22 +29,20 @@ namespace TestDatabase
 
                     try
                     {
-                         Product prod = await conn.GetAsync<Product>(productid);
-                         TestMessage = string.Format("Product with ID {0} has name {1}", productid, prod.ID);
-                                                  
+                         Product prod = await conn.GetAsync<Product>(productName);                                 
                     }
                     catch (Exception ex)
                     {
-                         StatusMessage = string.Format("Product with id {0} not found. Error ", productid, ex);
+                         StatusMessage = string.Format("Product with name {0} not found. Error ", productName, ex);
                     }
 
-                    result = await conn.InsertAsync(new Supplies { ProductID = productid, ProviderID = providerid });
+                    result = await conn.InsertAsync(new Supplies { ProductName = productName, ProviderName = providerName });
 
                     //StatusMessage = string.Format("{0} record(s) added [ID: {1})", result, productid);
                }
                catch (Exception ex)
                {
-                    StatusMessage = string.Format("Failed to add {0}. Error: {1}", productid, ex.Message);
+                    StatusMessage = string.Format("Failed to add {0}. Error: {1}", productName, ex.Message);
                }
 
 

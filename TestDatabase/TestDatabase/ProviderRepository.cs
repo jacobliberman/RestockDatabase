@@ -21,7 +21,7 @@ namespace TestDatabase
                conn.CreateTableAsync<Provider>();
           }
 
-          public async Task AddNewProvider(string name, string id)
+          public async Task AddNewProvider(string name)
           {
                int result = 0;
                try
@@ -32,13 +32,14 @@ namespace TestDatabase
 
                     try
                     {
-                         result = await conn.InsertAsync(new Provider { Name = name, ID = id });
+                         result = await conn.InsertAsync(new Provider { Name = name});
                          StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
 
                     }
                     catch (SQLiteException ex)
                     {
-                         StatusMessage = string.Format("Failed to Add Provider. Provider with ID \"{0}\" already exists ",id); 
+                         StatusMessage = string.Format("Failed to Add Provider. Provider with Name \"{0}\" already exists "); 
+                         StatusMessage = string.Format("Failed to Add Provider. Provider with Name \"{0}\" already exists "); 
                     }
                }
                catch (Exception ex)
@@ -64,7 +65,7 @@ namespace TestDatabase
           public void DeleteProvider(Provider delete)
           {
                //ToDO
-               conn.DeleteAsync<Provider>(delete.ID);
+               conn.DeleteAsync<Provider>(delete.Name);
                return;
           }
 

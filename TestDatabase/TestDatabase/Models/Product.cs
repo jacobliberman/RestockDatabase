@@ -8,10 +8,9 @@ namespace TestDatabase.Models
      [Table("product")]
      public class Product
      {
-          [PrimaryKey]
-          public string ID { get; set; }
+         
 
-          [MaxLength(250)]
+          [PrimaryKey,MaxLength(250), Unique]
           public string Name { get; set; }
 
           [MaxLength(250)]

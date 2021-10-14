@@ -6,11 +6,11 @@ namespace TestDatabase.Models
      {
 
           [ForeignKey(typeof(Provider))]
-          public string ProviderID { get; set; }
+          public string ProviderName { get; set; }
 
 
           [ForeignKey(typeof(Product))]
-          public string ProductID { get; set; }
+          public string ProductName { get; set; }
 
      }
 }
