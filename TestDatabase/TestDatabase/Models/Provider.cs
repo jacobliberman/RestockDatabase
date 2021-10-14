@@ -14,8 +14,10 @@ namespace TestDatabase.Models
           public string Name { get; set; }
 
 
+
           public string Frequency{ get; set; }
 
+   
           public List<Product> ProductsSupplied { get; set; }
 
      }

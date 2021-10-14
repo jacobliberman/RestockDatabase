@@ -17,7 +17,7 @@ namespace TestDatabase
                conn = new SQLiteAsyncConnection(dbPath);
                conn.CreateTableAsync<Product>();
           }
-
+      
           public async Task AddNewProduct(string name, string desc, double price)
           {
                int result = 0;
@@ -63,6 +63,7 @@ namespace TestDatabase
                     StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, desc);
 
                }
+
                catch (Exception ex)
                {
                     StatusMessage = string.Format("Failed to add {0}. Error: {1}", desc, ex.Message);
@@ -113,8 +114,9 @@ namespace TestDatabase
                }
                return new List<Product>();
           }
-          public void DeleteProduct() {
-               //TODO
+          public void DeleteProduct(Product delete) {
+            //ToDO
+            conn.DeleteAsync<Product>(delete.ID);
                return;
           }
 

@@ -11,7 +11,7 @@ namespace TestDatabase.Models
      public class Product
      {
           [PrimaryKey,AutoIncrement]
-          public int Id { get; set; }
+          public int ID { get; set; }
 
 
           [MaxLength(250)]

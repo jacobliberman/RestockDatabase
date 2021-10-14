@@ -20,26 +20,22 @@ namespace TestDatabase
             InitializeComponent();
         }
 
-        /// <summary>
-        ///  Adds new product to SQLite Table on button press
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
+
         public async void OnNewButtonClicked(object sender, EventArgs args)
         {
             statusMessage.Text = "";
 
 
-               await App.ProductRepo.AddNewProduct(newProduct.Text, newDesc.Text, Convert.ToDouble(newPrice.Text));
+               await App.ProductRepo.AddNewProduct(newProduct.Text, newID.Text, Convert.ToDouble(newID.Text));
              
             statusMessage.Text = App.ProductRepo.StatusMessage;
         }
 
-          /// <summary>
-          /// Gets and prints list of products in database 
-          /// </summary>
-          /// <param name="sender"></param>
-          /// <param name="args"></param>
+        /// <summary>
+        /// Gets and prints list of products in database 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public async void OnGetButtonClicked(object sender, EventArgs args)
         {
             statusMessage.Text = "";
@@ -145,6 +141,10 @@ namespace TestDatabase
                }
                
           }
-     
+
+        void BtnWelcome_Clicked(System.Object sender, System.EventArgs e)
+        {
+            App.Current.MainPage = new Pages.WelcomePage();
+        }
     }
 }
