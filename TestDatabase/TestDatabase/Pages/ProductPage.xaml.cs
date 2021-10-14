@@ -27,7 +27,7 @@ namespace TestDatabase
           {
                statusMessage.Text = "";
 
-               await App.ProductRepo.AddNewProduct(newProduct.Text, newDesc.Text);
+               await App.ProductRepo.AddNewProduct(newProduct.Text);
                //await App.ProductRepo.AddNewProduct(newProduct.Text, newDesc.Text, Convert.ToDouble(newPrice.Text));
 
                statusMessage.Text = App.ProductRepo.StatusMessage;
@@ -77,6 +77,11 @@ namespace TestDatabase
                }
                */
 
+          }
+
+          public async void BtnWelcome_Clicked(object sender, EventArgs args)
+          {
+               return;
           }
 
           private async void OnFileUploadButtonClicked(object sender, EventArgs args)

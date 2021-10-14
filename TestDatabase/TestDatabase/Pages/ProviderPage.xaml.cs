@@ -28,7 +28,7 @@ namespace TestDatabase
                statusMessage.Text = "";
 
 
-               await App.ProviderRepo.AddNewProvider(newProviderName.Text, newProviderId.Text);
+               await App.ProviderRepo.AddNewProvider(newProviderName.Text);
 
                statusMessage.Text = App.ProviderRepo.StatusMessage;
           }
