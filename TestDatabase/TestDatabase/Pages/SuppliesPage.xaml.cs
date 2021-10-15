@@ -67,6 +67,13 @@ namespace TestDatabase
                
           }
 
+          public async void OnGetSuppliersButtonClicked(object sender, EventArgs args)
+          {
+               Product p = await App.conn.GetAsync<Product>(searchProductId.Text);
+               List<Provider> providers = await App.ProductRepo.GetAllProviders(p);
+               suppliersList.ItemsSource = providers;
+          }
+
           public async void OnSuppliesGetButtonClicked(object sender, EventArgs args)
           {
                statusMessage.Text = "";
