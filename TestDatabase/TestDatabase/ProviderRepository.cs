@@ -26,7 +26,7 @@ namespace TestDatabase
                 if (string.IsNullOrEmpty(name))
                     throw new Exception("Valid name required");
 
-                result = await conn.InsertAsync(new Product { Name = name, ID = id});
+                result = await conn.InsertAsync(new Product { Name = name});
 
                 StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
             }
@@ -53,7 +53,7 @@ namespace TestDatabase
         public void DeleteProvider(Provider delete)
         {
             //ToDO
-            conn.DeleteAsync<Provider>(delete.ID);
+            conn.DeleteAsync<Provider>(delete.Name);
             return;
         }
 
