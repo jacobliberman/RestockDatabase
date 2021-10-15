@@ -14,7 +14,7 @@ namespace TestDatabase
           public SuppliesRepository(SQLiteAsyncConnection conn)
           {
                this.conn = conn;
-               //conn = new SQLiteAsyncConnection(dbPath);
+               
                //conn.DropTableAsync<Supplies>().Wait(); 
                conn.CreateTableAsync<Supplies>().Wait();
           }

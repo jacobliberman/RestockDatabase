@@ -15,7 +15,7 @@ namespace TestDatabase
           public ProductPage()
           {
                InitializeComponent();
-               statusMessage.Text = FileSystem.AppDataDirectory;
+               
           }
 
           /// <summary>

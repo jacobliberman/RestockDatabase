@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestDatabase.Models;
 using SQLiteNetExtensions.Attributes;
-using SQLiteNetExtensionsAsync;
-using SQLiteNetExtensions;
+using SQLiteNetExtensionsAsync.Extensions;
+
+using SQLiteNetExtensions.Extensions;
 
 namespace TestDatabase
 {
@@ -62,11 +63,21 @@ namespace TestDatabase
                }
                return new List<Provider>();
           }
-          public void DeleteProvider(Provider delete)
+
+          public async Task<List<Product>> GetAllProducts(Provider prov)
           {
-               //ToDO
-               conn.DeleteAsync<Provider>(delete.Name);
-               return;
+               Provider p = await conn.GetWithChildrenAsync<Provider>(prov.Name);
+               return p.Products;
+
+          }
+
+          public async void DeleteProvider(Provider delete)
+          {
+               
+               delete.Products = null;
+               await conn.UpdateWithChildrenAsync(delete);
+               await conn.DeleteAsync(delete, recursive: true);
+
           }
 
           public Task<int> ClearAllProviders<T>()
@@ -74,16 +85,6 @@ namespace TestDatabase
                return conn.DeleteAllAsync<Provider>();
           }
     
-          public void provToString(Product prod)
-          {
-               List < Provider > provs = prod.Providers;
-               string str ="";
-               
-               foreach (Provider p in provs)
-               {
-                    Console.Write("------------------------------------------------TEST-------------------------");
-               }
-          }
      
      
      

@@ -20,8 +20,21 @@
             <Label x:Name="testMessage" />
 
             <Label x:Name="statusMessage" />
-            
-            
+
+            <Button Text="Get Suppliers of Product"
+                    Clicked="OnGetSuppliersButtonClicked" />
+
+            <ListView x:Name="suppliersList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="10">
+                            <Grid Padding="5">
+                                <Label Text="{Binding Name}" HorizontalTextAlignment="End" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
             <Button Text="Get All Supplies"
                     Clicked="OnSuppliesGetButtonClicked" />
@@ -37,10 +50,10 @@
             <ListView x:Name="suppliesList">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell Height="30">
+                        <ViewCell Height="10">
                             <Grid Padding="5">
-                                <Label Text="{Binding ProviderID}" />
-                                <Label Grid.Column="1" Text="{Binding ProductID}"  HorizontalTextAlignment="End" />
+                                <Label Text="{Binding ProviderName}" />
+                                <Label Grid.Column="1" Text="{Binding ProductName}"  HorizontalTextAlignment="End" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

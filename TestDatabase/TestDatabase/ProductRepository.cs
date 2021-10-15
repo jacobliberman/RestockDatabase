@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestDatabase.Models;
 using SQLiteNetExtensionsAsync.Extensions;
+using SQLiteNetExtensions.Attributes;
+using SQLiteNetExtensions.Extensions;
 
 namespace TestDatabase
 {
@@ -92,37 +94,14 @@ namespace TestDatabase
 
           }
 
-          /*  public async Task AddNewProduct(string desc, string category, string department, string date, string soldQuantity, string totalNoTax,string hour)
-            {
-                 int result = 0;
-                 try
-                 {
-                      if (string.IsNullOrEmpty(desc))
-                           throw new Exception("Valid Description Required");
-                      if (string.IsNullOrEmpty(category))
-                           throw new Exception("Valid Category Required");
-                      if (string.IsNullOrEmpty(department))
-                           throw new Exception("Valid Department Required");
-                      if (string.IsNullOrEmpty(date))
-                           throw new Exception("Valid Date Required");
-                     // if (double.IsNaN(totalNoTax))
-                     //      throw new Exception("Valid Total Required");
-                      if (string.IsNullOrEmpty(hour))
-                           throw new Exception("Valid Sale Hour Required");
 
-                      result = await conn.InsertAsync(new Product { Description = desc, Category=category, Department=department,Date=date,Quantity=soldQuantity,TotalWithoutTax=totalNoTax,SaleHour=hour });
-                      StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, desc);
-
-                 }
-
-                 catch (Exception ex)
-                 {
-                      StatusMessage = string.Format("Failed to add {0}. Error: {1}", desc, ex.Message);
-                 }
-            }
-          */
-
-
+          public async Task<List<Provider>> GetAllProviders(Product prod)
+          {             
+                    Product p = await conn.GetWithChildrenAsync<Product>(prod.Name);
+                    return p.Providers;
+                            
+          }
+         
           public async Task AddProvider(Product prod, Provider prov){
                try
                {
@@ -158,11 +137,11 @@ namespace TestDatabase
                }
                return new List<Product>();
           }
-          public void DeleteProduct(Product delete)
+          public async void DeleteProduct(Product delete)
           {
-               //ToDO
-               conn.DeleteAsync<Product>(delete.Name);
-               return;
+               delete.Providers = null;
+               await conn.UpdateWithChildrenAsync(delete);
+               await conn.DeleteAsync(delete, recursive: true);
           }
 
           public Task<int> ClearAllItems<T>()
