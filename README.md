@@ -1,4 +1,3 @@
-# RestockDatabase
 # Restock Helper
 
 Our project was requested by our client, La Eso. La Eso is a convenience store / restaurant in Juticalpa, Honduras. The store is located in a rural state, and often has issues of stock shortage and limited supplier visits. A supplier that arrives once a month may have a product one week, then run out for the next month without warning. Some products are processed, so counting the current inventory amount would involve translating the processed product into its components, and reducing those amounts from the inventory. The current method for ordering products relies solely on guesswork by the Inventory Administrator, which leads to running out of vital raw materials. 
