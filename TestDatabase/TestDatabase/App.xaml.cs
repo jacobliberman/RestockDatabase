@@ -13,6 +13,7 @@ namespace TestDatabase
           public static SuppliesRepository SuppliesRepo { get; private set; }
 
           public static SQLiteAsyncConnection conn { get; private set; }
+
           public App()
           {
                InitializeComponent();
@@ -29,9 +30,6 @@ namespace TestDatabase
               
 
                MainPage = tabbedPage;
-
-
-               //MainPage = new MainPage();
           }
 
           protected override void OnStart()

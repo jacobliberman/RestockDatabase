@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TestDatabase.Pages.NewCalcPage">
+    <ContentPage.Content>
+
+    <StackLayout VerticalOptions="Center"
+                 HorizontalOptions="Center">
+        <Label Text="Please add the following information in order to create a new Calculation:"
+                FontSize="Medium"
+                />
+    
+        <Button Text="Go back to Functions Page"
+                BackgroundColor="LightGray"
+                Clicked="BacktoFunctionsClicked"
+                />
+         
+
+    </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>

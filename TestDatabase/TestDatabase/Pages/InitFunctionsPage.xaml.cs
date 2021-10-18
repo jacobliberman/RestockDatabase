@@ -11,5 +11,13 @@ namespace TestDatabase.Pages
         {
             InitializeComponent();
         }
+
+
+        void BtnViewPrevCalculation_Clicked(System.Object sender, System.EventArgs e)
+        {
+
+        }
+
+
     }
 }
