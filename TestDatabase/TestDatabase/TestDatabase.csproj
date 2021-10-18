@@ -27,6 +27,9 @@
     <Compile Update="Pages\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\NewCalcPage.xaml.cs">
+      <DependentUpon>NewCalcPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
