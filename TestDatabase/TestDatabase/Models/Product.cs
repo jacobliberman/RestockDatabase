@@ -4,8 +4,10 @@ using SQLiteNetExtensions.Attributes;
 using System.Collections.Generic;
 using CsvHelper.TypeConversion;
 using CsvHelper.Expressions;
+
 using CsvHelper;
 using System;
+using CsvHelper.Configuration.Attributes;
 
 namespace TestDatabase.Models
 {
@@ -31,10 +33,10 @@ namespace TestDatabase.Models
           public double Price { get; set; }
 
 
-          public string TotalSale { get; set; }
+          public int TotalSale { get; set; }
 
 
-          public string Quantity { get; set; }
+          public int Quantity { get; set; }
 
 
           public string Date { get; set; }
@@ -47,17 +49,26 @@ namespace TestDatabase.Models
           
           public int prevSales { get; set; }
 
-
           public string SaleHour { get; set; }
 
-         
+         [TypeConverter(typeof(ToStrArrayConverter))]
+          public List<String> listOfProviders { get; set; }
 
           [ManyToMany(typeof(Supplies))]
           public List<Provider> Providers { get; set; } = new List<Provider>();
 
      }
 
-     
+     public class ToStrArrayConverter : TypeConverter
+     {
+          public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
+          {
+               string[] allElements = text.Split(';');
+               return new List<String>(allElements);
+          }
+
+     }
+
 
      public class InventoryImport : ClassMap<Product>
      {
@@ -73,15 +84,11 @@ namespace TestDatabase.Models
                Map(m => m.numInStock).Name("NumInStock");
                Map(m => m.prevSales).Name("PrevSales");
                Map(m => m.SaleHour).Name("SaleHour");
-               
+
                //TODO Check if provider exists, 
                //    Add to provider list if exists
                //    Add provider then add to list if not
-               Map(m => m.Providers).Convert(row =>
-                {
-                    
-               });
-
+               Map(m => m.listOfProviders).Name("Provider(s)");
 
 
                // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
