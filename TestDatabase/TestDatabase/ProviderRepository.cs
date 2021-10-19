@@ -51,6 +51,10 @@ namespace TestDatabase
 
           }
 
+          public async Task<Provider> GetProvider(string pname)
+          {
+               return await App.conn.GetAsync<Provider>(pname);
+          }
           public async Task<List<Provider>> GetAllProviders()
           {
                try

@@ -7,6 +7,7 @@ using SQLiteNetExtensionsAsync.Extensions;
 using SQLiteNetExtensions.Attributes;
 using SQLiteNetExtensions.Extensions;
 
+
 namespace TestDatabase
 {
 
@@ -26,6 +27,50 @@ namespace TestDatabase
                conn.CreateTableAsync<Product>();
           }
 
+
+
+          public async Task AddNewProduct(string name, string desc, string cat, string dept, double price, int totalSale, int quan, string date, int numStock, int prevSales, string saleHour, List<string> provs)
+          {
+               int result = 0;
+               try
+               {
+                    if (string.IsNullOrEmpty(name))
+                         throw new Exception("Valid name required");
+                    if (string.IsNullOrEmpty(desc))
+                         throw new Exception("Valid description required");
+                    if (string.IsNullOrEmpty(cat))
+                         throw new Exception("Valid category required");
+                    if (string.IsNullOrEmpty(dept))
+                         throw new Exception("Valid department required");
+                    if (double.IsNaN(price))
+                         throw new Exception("Valid price required");                              
+                    if (string.IsNullOrEmpty(date))
+                         throw new Exception("Valid date required");
+                    if (string.IsNullOrEmpty(saleHour))
+                         throw new Exception("Valid sale hour required");
+      
+
+                    result = await conn.InsertAsync(new Product { Name = name, Description = desc, Category = cat, Department = dept, Price = price, TotalSale = totalSale, Quantity = quan, Date = date, numInStock = numStock, prevSales = prevSales, SaleHour = saleHour, listOfProviders = provs });
+                    StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
+
+               }
+               catch (Exception ex)
+               {
+                   StatusMessage = string.Format("Failed to add {0}. Error: {1}", name, ex.Message);
+               }
+
+          }
+
+
+
+
+          /// <summary>
+          /// Adds new product to Product Database
+          /// </summary>
+          /// <param name="name"></param>
+          /// <param name="desc"></param>
+          /// <param name="price"></param>
+          /// <returns></returns>
           public async Task AddNewProduct(string name, string desc, double price)
           {
                int result = 0;
@@ -95,6 +140,11 @@ namespace TestDatabase
           }
 
 
+          /// <summary>
+          /// Gets List of all providers of a product
+          /// </summary>
+          /// <param name="prod"></param>
+          /// <returns>List of Providers</returns>
           public async Task<List<Provider>> GetAllProviders(Product prod)
           {             
                     Product p = await conn.GetWithChildrenAsync<Product>(prod.Name);
@@ -102,6 +152,12 @@ namespace TestDatabase
                             
           }
          
+          /// <summary>
+          /// Adds Provider to Product and vice-versa
+          /// </summary>
+          /// <param name="prod"></param>
+          /// <param name="prov"></param>
+          /// <returns></returns>
           public async Task AddProvider(Product prod, Provider prov){
                try
                {
@@ -124,6 +180,10 @@ namespace TestDatabase
                }
           }
 
+          /// <summary>
+          /// Gets list of all Products in database
+          /// </summary>
+          /// <returns>List of Products</returns>
           public async Task<List<Product>> GetAllProducts()
           {
                try
@@ -137,6 +197,11 @@ namespace TestDatabase
                }
                return new List<Product>();
           }
+
+          /// <summary>
+          /// Deletes Product from Database
+          /// </summary>
+          /// <param name="delete">Product to delete</param>
           public async void DeleteProduct(Product delete)
           {
                delete.Providers = null;
@@ -148,6 +213,37 @@ namespace TestDatabase
           {
                return conn.DeleteAllAsync<Product>();
           }
+
+          /// <summary>
+          /// Links list of providers to their respective entries in the database, or creates a new provider if it does not exists
+          /// </summary>
+          /// <param name="p">Product to add providers to</param>
+          public async void LinkProviderList(Product p)
+          {
+               List<Provider> pList = new List<Provider>();
+               foreach (string prov in p.listOfProviders)
+               {
+                    //Check if provider exists
+                    Provider pExists = await conn.FindAsync<Provider>(prov);
+                    if (pExists is null)
+                    { //Does not exist, Make new provider
+                         await App.ProviderRepo.AddNewProvider(prov);
+                         pExists = await App.ProviderRepo.GetProvider(prov);
+                    }
+                    pList.Add(pExists);
+               }
+               p.Providers = pList;
+               try
+               {
+                    await conn.UpdateWithChildrenAsync(p);
+               }
+               catch (Exception ex)
+               {
+                    Console.WriteLine("Could not add list of providers. {0}", ex);
+               }
+
+          }
+
 
      }
 }
