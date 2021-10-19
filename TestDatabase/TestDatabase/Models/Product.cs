@@ -72,6 +72,7 @@ namespace TestDatabase.Models
      {
           public ProductMap()
           {
+               Map(m => m.Name).Name("Name");
                Map(m => m.Description).Name("Article Description");
                Map(m => m.Category).Name("Category");
                Map(m => m.Department).Name("Departament");

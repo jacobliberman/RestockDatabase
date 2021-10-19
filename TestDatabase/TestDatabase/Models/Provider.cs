@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using CsvHelper.Configuration;
+using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System.Collections.Generic;
 
@@ -23,4 +24,13 @@ namespace TestDatabase.Models
    
 
      }
+    public class ProviderMap : ClassMap<Provider>
+    {
+        public ProviderMap()
+        {
+            Map(m => m.Name).Name("Name");
+            Map(m => m.Products).Name("Products");
+            Map(m => m.Frequency).Name("Frequency");
+        }
+    }
 }
