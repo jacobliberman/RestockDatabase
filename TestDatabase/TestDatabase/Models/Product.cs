@@ -112,8 +112,9 @@ namespace TestDatabase.Models
             Map(m => m.TotalSale).Name("Total Sales");
             // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
             Map(m => m.SaleHour).Name("Sale hour");
-            // Map(m => m.ProvidedBy).Name("Provider");
-        }
+               // Map(m => m.ProvidedBy).Name("Provider");
+            Map(m => m.listOfProviders).Name("Provider(s)");
+          }
     }
 
 
