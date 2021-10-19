@@ -103,14 +103,18 @@ namespace TestDatabase.Models
      {
           public NewProductMap()
           {
-               Map(m => m.Description).Name("Description");
-               Map(m => m.Quantity).Name("Quantity Sold");
-               Map(m => m.TotalSale).Name("Total Sales");
-              // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
-               Map(m => m.Category).Name("Category");
-               Map(m => m.Department).Name("Department");
-          }
-     }
+            Map(m => m.Name).Name("Name");
+            Map(m => m.Description).Name("Article Description");
+            Map(m => m.Category).Name("Category");
+            Map(m => m.Department).Name("Departament");
+            Map(m => m.Date).Name("Date of Sale");
+            Map(m => m.Quantity).Name("Sold Quantity");
+            Map(m => m.TotalSale).Name("Total Sales");
+            // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
+            Map(m => m.SaleHour).Name("Sale hour");
+            // Map(m => m.ProvidedBy).Name("Provider");
+        }
+    }
 
 
 
