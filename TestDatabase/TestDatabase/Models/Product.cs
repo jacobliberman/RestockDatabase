@@ -51,8 +51,8 @@ namespace TestDatabase.Models
 
           public string SaleHour { get; set; }
 
-         [TypeConverter(typeof(ToStrArrayConverter))]
-          public List<String> listOfProviders { get; set; }
+         
+          public string listOfProviders { get; set; }
 
           [ManyToMany(typeof(Supplies))]
           public List<Provider> Providers { get; set; } = new List<Provider>();

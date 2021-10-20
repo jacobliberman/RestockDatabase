@@ -129,9 +129,11 @@ namespace TestDatabase
 
                               foreach (Product prod in records)
                               {
-                                                                     
-                                   await App.ProductRepo.AddNewProduct(prod.Name,prod.Description,prod.Category,prod.Department,prod.Price,prod.TotalSale,prod.Quantity,prod.Date,prod.numInStock,prod.prevSales,prod.SaleHour,prod.listOfProviders);
-
+                                   
+                                   await App.ProductRepo.AddNewProduct(prod);
+                                   await App.ProductRepo.LinkProviderList(prod);
+                                   //await App.ProductRepo.AddNewProduct(prod.Name,prod.Description,prod.Category,prod.Department,prod.Price,prod.TotalSale,prod.Quantity,prod.Date,prod.numInStock,prod.prevSales,prod.SaleHour,prod.listOfProviders);
+                                   Console.WriteLine("Product Added. {0}", prod.Name);
                               }
                               statusMessage.Text = App.ProductRepo.StatusMessage;
 

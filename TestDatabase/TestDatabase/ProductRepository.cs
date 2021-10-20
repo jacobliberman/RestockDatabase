@@ -6,7 +6,7 @@ using TestDatabase.Models;
 using SQLiteNetExtensionsAsync.Extensions;
 using SQLiteNetExtensions.Attributes;
 using SQLiteNetExtensions.Extensions;
-
+using System.Linq;
 
 namespace TestDatabase
 {
@@ -23,17 +23,34 @@ namespace TestDatabase
                // ***************** UNCOMMENT TO CLEAR TABLE ON REBOOT *********************
                //conn.DropTableAsync<Product>().Wait(); 
                
-               //conn = new SQLiteAsyncConnection(dbPath);
+               
                conn.CreateTableAsync<Product>();
           }
 
 
 
-          public async Task AddNewProduct(string name, string desc, string cat, string dept, double price, int totalSale, int quan, string date, int numStock, int prevSales, string saleHour, List<string> provs)
+          public async Task AddNewProduct(Product p)
           {
                int result = 0;
                try
                {
+                    result = await conn.InsertAsync(p);
+                    StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, p.Name);
+
+               }
+               catch (Exception ex)
+               {
+                    StatusMessage = string.Format("Failed to add {0}. Error: {1}", p.Name, ex.Message);
+               }
+
+          }
+
+          public async Task AddNewProduct(string name, string desc, string cat, string dept, double price, int totalSale, int quan, string date, int numStock, int prevSales, string saleHour,string provs)
+          {
+               int result = 0;
+               try
+               {
+                    /*
                     if (string.IsNullOrEmpty(name))
                          throw new Exception("Valid name required");
                     if (string.IsNullOrEmpty(desc))
@@ -48,15 +65,21 @@ namespace TestDatabase
                          throw new Exception("Valid date required");
                     if (string.IsNullOrEmpty(saleHour))
                          throw new Exception("Valid sale hour required");
-      
+      */
+
+
+                    //Product newP = new Product { Name = name, Description = desc, Category = cat, Department = dept, Price = price, TotalSale = totalSale, Quantity = quan, Date = date, numInStock = numStock, prevSales = prevSales, SaleHour = saleHour, listOfProviders = provs };
+                    //result = await conn.InsertAsync(newP);
+
 
                     result = await conn.InsertAsync(new Product { Name = name, Description = desc, Category = cat, Department = dept, Price = price, TotalSale = totalSale, Quantity = quan, Date = date, numInStock = numStock, prevSales = prevSales, SaleHour = saleHour, listOfProviders = provs });
                     StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
-
+                    //return newP;
                }
                catch (Exception ex)
                {
                    StatusMessage = string.Format("Failed to add {0}. Error: {1}", name, ex.Message);
+                    //return null;
                }
 
           }
@@ -218,15 +241,17 @@ namespace TestDatabase
           /// Links list of providers to their respective entries in the database, or creates a new provider if it does not exists
           /// </summary>
           /// <param name="p">Product to add providers to</param>
-          public async void LinkProviderList(Product p)
+          public async Task LinkProviderList(Product p)
           {
+               List<string> provList = p.listOfProviders.Split(';').ToList();
                List<Provider> pList = new List<Provider>();
-               foreach (string prov in p.listOfProviders)
+               foreach (string prov in provList)
                {
                     //Check if provider exists
                     Provider pExists = await conn.FindAsync<Provider>(prov);
                     if (pExists is null)
                     { //Does not exist, Make new provider
+                         Console.WriteLine("Provider {0} does not exist.", prov);
                          await App.ProviderRepo.AddNewProvider(prov);
                          pExists = await App.ProviderRepo.GetProvider(prov);
                     }
@@ -241,7 +266,7 @@ namespace TestDatabase
                {
                     Console.WriteLine("Could not add list of providers. {0}", ex);
                }
-
+               
           }
 
 

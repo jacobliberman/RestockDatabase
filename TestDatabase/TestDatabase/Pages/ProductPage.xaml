@@ -42,6 +42,7 @@
         <Button Text="Add Product"
             Grid.Row="3" Grid.ColumnSpan="3"
             Clicked="OnNewButtonClicked" />
+        
 
         <Label x:Name="statusMessage" Grid.ColumnSpan="3"
            Grid.Row="4" />
@@ -66,7 +67,7 @@
                     <ViewCell Height="30">
                         <Grid Padding="5">
                             <Label Text="{Binding Name}" />
-                            <Label Grid.Column="1" Text="{Binding ID}" />
+                            <Label Grid.Column="1" Text="{Binding Description}" />
                             <Label Grid.Column="2" Text="{Binding Providers}" HorizontalTextAlignment="End" />
                         </Grid>
                     </ViewCell>
