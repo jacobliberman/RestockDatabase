@@ -71,7 +71,13 @@ namespace TestDatabase
           {
                Product p = await App.conn.GetAsync<Product>(searchProductId.Text);
                List<Provider> providers = await App.ProductRepo.GetAllProviders(p);
-               suppliersList.ItemsSource = providers;
+               //suppliersList.ItemsSource = providers;
+               Console.WriteLine(providers.Count);
+               foreach( Provider pr in providers)
+               {
+                    Console.WriteLine(pr.Name);
+
+               }
           }
 
           public async void OnSuppliesGetButtonClicked(object sender, EventArgs args)
