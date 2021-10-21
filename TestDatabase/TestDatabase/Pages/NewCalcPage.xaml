@@ -10,9 +10,10 @@
         <Label Text="Please add the following information in order to create a new Calculation:"
                 FontSize="Medium"
                 />
-    
+
         <Button Text="Go back to Functions Page"
                 BackgroundColor="LightGray"
+                BorderWidth="3"
                 Clicked="BacktoFunctionsClicked"
                 />
          

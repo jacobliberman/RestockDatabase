@@ -13,15 +13,27 @@
     <Label Text="What do you want to do today?"
             FontAttributes="Bold"
             FontSize="Title"
-            TextColor="FloralWhite"
+            TextColor= "Black"
             />
 
-     <Button x:Name="BtnViewPrevCalculation"
+    <Button x:Name="BtnNewCalcPg"
+            Text="Create New Calculation"
+            FontSize="Medium"
+            Clicked="BtnNewCalcPg_Clicked"
+            />
+
+    <Button x:Name="BtnToUpdatePg"
+            Text="Update or Add to Inventory"
+            FontSize="Medium"
+            Clicked="BtnToUpdatePg_Clicked"
+            />
+
+    <Button x:Name="BtnViewPrevCalculation"
             Text="View Previous Calculation"
             FontSize="Medium"
             Clicked="BtnViewPrevCalculation_Clicked"
              />
-    
+   
 
 
     </StackLayout>

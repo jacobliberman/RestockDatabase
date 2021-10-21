@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Linq;
+using System.Text;
+using Xamarin.Forms.Xaml;
 
 namespace TestDatabase.Pages
 {
@@ -13,10 +16,24 @@ namespace TestDatabase.Pages
         }
 
 
-        void BtnViewPrevCalculation_Clicked(System.Object sender, System.EventArgs e)
+        private async void BtnNewCalcPg_Clicked(System.Object sender, System.EventArgs e)
         {
-
+            await Navigation.PushAsync(new Pages.NewCalcPage());
         }
+
+    
+
+        async void BtnViewPrevCalculation_Clicked(System.Object sender, System.EventArgs e)
+        {
+            //await Navigation.PushAsync(new ViewPrevCalcPage());
+        }
+
+        private async void BtnToUpdatePg_Clicked(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new Pages.UpdateFuncsPage());
+        }
+
+
 
 
     }

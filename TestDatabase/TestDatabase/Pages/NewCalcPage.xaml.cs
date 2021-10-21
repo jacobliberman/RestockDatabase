@@ -10,7 +10,9 @@ namespace TestDatabase.Pages
         public NewCalcPage()
         {
             InitializeComponent();
+
         }
+
 
         // Button to return to Functions Clicked 
         private async void BacktoFunctionsClicked(System.Object sender, System.EventArgs e)

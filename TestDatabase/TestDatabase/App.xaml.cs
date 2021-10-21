@@ -23,13 +23,9 @@ namespace TestDatabase
                ProviderRepo = new ProviderRepository(conn);
                SuppliesRepo = new SuppliesRepository(conn);
 
-               
-               var tabbedPage = new tPage();
+               MainPage = new NavigationPage(new Pages.InitFunctionsPage());
 
-               //tabbedPage.Children.Add(new MainPage());
-              
 
-               MainPage = tabbedPage;
           }
 
           protected override void OnStart()
