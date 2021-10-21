@@ -43,6 +43,9 @@ namespace TestDatabase.Models
           
           public int prevSales { get; set; }
 
+          public int minStock { get; set; }
+
+          public int lastWeekStock { get; set; }
 
           public string SaleHour { get; set; }
 
@@ -66,6 +69,7 @@ namespace TestDatabase.Models
             Map(m => m.TotalSale).Name("Total Sales");
             // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
             Map(m => m.SaleHour).Name("Sale hour");
+            Map(m => m.minStock).Name("Minimum stock");
             // Map(m => m.ProvidedBy).Name("Provider");
         }
     }
@@ -85,7 +89,7 @@ namespace TestDatabase.Models
                Map(m => m.TotalSale).Name("Total Sales");
               // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
                Map(m => m.SaleHour).Name("Sale hour");
-               // Map(m => m.ProvidedBy).Name("Provider");
+               //Map(m => m.ProvidedBy).Name("Provider");
           }
      }
 
