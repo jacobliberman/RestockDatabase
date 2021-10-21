@@ -81,7 +81,8 @@ namespace TestDatabase
 
           public async void BtnWelcome_Clicked(object sender, EventArgs args)
           {
-               return;
+                //missing await
+                return;
           }
 
           private async void OnFileUploadButtonClicked(object sender, EventArgs args)
