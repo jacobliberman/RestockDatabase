@@ -268,6 +268,13 @@ namespace TestDatabase
                }
                
           }
+        public async void update(string name, int newQuantity)
+        {
+            Product p = await conn.FindAsync<Product>(name);
+            p.Quantity = p.Quantity - newQuantity;
+            await conn.UpdateWithChildrenAsync(p);
+
+        }
 
 
      }
