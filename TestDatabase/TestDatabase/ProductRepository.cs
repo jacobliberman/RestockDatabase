@@ -272,6 +272,13 @@ namespace TestDatabase
         {
             Product p = await conn.FindAsync<Product>(name);
             p.Quantity = p.Quantity - newQuantity;
+            if(p.Quantity < p.minStock + 5)
+            {
+                Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+            }
+            else if(p.Quantity <=p.lastWeekStock) {
+                Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+            }
             await conn.UpdateWithChildrenAsync(p);
 
         }
