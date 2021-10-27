@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using TestDatabase.Models;
 using SQLiteNetExtensions.Attributes;
 using SQLiteNetExtensionsAsync.Extensions;
-
+using System.Linq;
 using SQLiteNetExtensions.Extensions;
 
 namespace TestDatabase
@@ -20,6 +20,22 @@ namespace TestDatabase
                //conn = new SQLiteAsyncConnection(dbPath);
                //conn.DropTableAsync<Provider>().Wait();
                conn.CreateTableAsync<Provider>();
+          }
+
+          public async Task AddNewProvider(Provider p)
+          {
+               int result = 0;
+               try
+               {
+                    result = await conn.InsertAsync(p);
+                    StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, p.Name);
+
+               }
+               catch (Exception ex)
+               {
+                    StatusMessage = string.Format("Failed to add {0}. Error: {1}", p.Name, ex.Message);
+               }
+
           }
 
           public async Task AddNewProvider(string name)
@@ -88,9 +104,36 @@ namespace TestDatabase
           {
                return conn.DeleteAllAsync<Provider>();
           }
-    
-     
-     
-     
+
+          public async Task LinkProductList(Provider p)
+          {
+               List<string> prodList = p.listOfProducts.Split(';').ToList();
+               List<Product> pList = new List<Product>();
+               foreach (string prod in prodList)
+               {
+                    //Check if provider exists
+                    Product pExists = await conn.FindAsync<Product>(prod);
+                    if (pExists is null)
+                    { //Does not exist, Make new provider
+                         Console.WriteLine("Provider {0} does not exist.", prod);
+                         await App.ProductRepo.AddNewProduct(prod);
+                         pExists = await App.ProductRepo.GetProduct(prod);
+                    }
+                    pList.Add(pExists);
+               }
+               p.Products = pList;
+               try
+               {
+                    await conn.UpdateWithChildrenAsync(p);
+               }
+               catch (Exception ex)
+               {
+                    Console.WriteLine("Could not add list of providers. {0}", ex);
+               }
+
+          }
+
+
+
      }
 }
