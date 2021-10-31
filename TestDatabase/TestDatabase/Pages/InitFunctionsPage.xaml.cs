@@ -23,9 +23,9 @@ namespace TestDatabase.Pages
 
     
 
-        async void BtnViewPrevCalculation_Clicked(System.Object sender, System.EventArgs e)
+        private async void BtnViewPrevCalculation_Clicked(System.Object sender, System.EventArgs e)
         {
-            //await Navigation.PushAsync(new ViewPrevCalcPage());
+           // await Navigation.PushAsync(new ViewPrevCalcPage());
         }
 
         private async void BtnToUpdatePg_Clicked(System.Object sender, System.EventArgs e)
