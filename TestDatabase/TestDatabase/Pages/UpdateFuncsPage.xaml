@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestDatabase.Pages.UpdateFuncsPage">
+
+    <StackLayout>
+         <Button x:Name="BtnUpdateSupplierPg"
+                Text="Update Supplier"
+                Clicked="BtnUpdateSupplierPg_Clicked"
+                />
+
+         <Button x:Name="BtnUpdateProductPg"
+                Text="Update Product"
+                Clicked="BtnUpdateProductPg_Clicked"
+                />
+
+         <Button x:Name="BtnUpdateProvider"
+                 Text="Update or add Supplier"
+                 Clicked="BtnUpdateProvider_Clicked"
+                 />
+
+    </StackLayout>
+   
+
+</ContentPage>

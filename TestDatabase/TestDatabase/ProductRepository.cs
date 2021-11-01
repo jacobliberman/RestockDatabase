@@ -203,6 +203,13 @@ namespace TestDatabase
                }
           }
 
+
+
+          public async Task<Product> GetProduct(string pname)
+          {
+               return await App.conn.GetAsync<Product>(pname);
+          }
+
           /// <summary>
           /// Gets list of all Products in database
           /// </summary>
