@@ -271,18 +271,33 @@ namespace TestDatabase
         public async void update(string name, int newQuantity)
         {
             Product p = await conn.FindAsync<Product>(name);
+            int temp = p.Quantity;
             p.Quantity = p.Quantity - newQuantity;
-            if(p.Quantity < p.minStock + 5)
+            Console.WriteLine("Amount sold in last week was: {0}", p.Quantity);
+            if (p.Quantity < p.minStock + 5)
             {
                 Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
             }
             else if(p.Quantity <=p.lastWeekStock) {
                 Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
             }
+            p.lastWeekStock = temp;
             await conn.UpdateWithChildrenAsync(p);
 
         }
-
+        public async void fetchRestock(string name)
+        {
+            Product p = await conn.FindAsync<Product>(name);
+            Console.WriteLine("Amount sold in last week was: {0}", p.Quantity);
+            if (p.Quantity < p.minStock + 5)
+            {
+                Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+            }
+            else if (p.Quantity <= p.lastWeekStock)
+            {
+                Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+            }
+        }
 
      }
 }
