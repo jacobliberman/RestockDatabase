@@ -312,5 +312,14 @@ namespace TestDatabase
             Console.WriteLine("Last weeks amount ordered: {0}", p.lastWeekStock-p.minStock);
         }
 
+        public async void updateCalculation(String name, int newminstock, int newlastweek)
+        {
+            Product p = await conn.FindAsync<Product>(name);
+            p.minStock = newminstock;
+            p.lastWeekStock = newlastweek;
+            await conn.UpdateWithChildrenAsync(p);
+
+        }
+
      }
 }
