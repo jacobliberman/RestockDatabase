@@ -306,5 +306,11 @@ namespace TestDatabase
             }
         }
 
+        public async void getCalculation(string name)
+        {
+            Product p = await conn.FindAsync<Product>(name);
+            Console.WriteLine("Last weeks amount ordered: {0}", p.lastWeekStock-p.minStock);
+        }
+
      }
 }
