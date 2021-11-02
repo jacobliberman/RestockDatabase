@@ -278,18 +278,48 @@ namespace TestDatabase
         public async void update(string name, int newQuantity)
         {
             Product p = await conn.FindAsync<Product>(name);
+            int temp = p.Quantity;
             p.Quantity = p.Quantity - newQuantity;
-            if(p.Quantity < p.minStock + 5)
+            Console.WriteLine("Amount sold in last week was: {0}", p.Quantity);
+            if (p.Quantity < p.minStock + 5)
             {
                 Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
             }
             else if(p.Quantity <=p.lastWeekStock) {
                 Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
             }
+            p.lastWeekStock = temp;
             await conn.UpdateWithChildrenAsync(p);
 
         }
+        public async void fetchRestock(string name)
+        {
+            Product p = await conn.FindAsync<Product>(name);
+            Console.WriteLine("Amount sold in last week was: {0}", p.Quantity);
+            if (p.Quantity < p.minStock + 5)
+            {
+                Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+            }
+            else if (p.Quantity <= p.lastWeekStock)
+            {
+                Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+            }
+        }
 
+        public async void getCalculation(string name)
+        {
+            Product p = await conn.FindAsync<Product>(name);
+            Console.WriteLine("Last weeks amount ordered: {0}", p.lastWeekStock-p.minStock);
+        }
+
+        public async void updateCalculation(String name, int newminstock, int newlastweek)
+        {
+            Product p = await conn.FindAsync<Product>(name);
+            p.minStock = newminstock;
+            p.lastWeekStock = newlastweek;
+            await conn.UpdateWithChildrenAsync(p);
+
+        }
 
      }
 }
