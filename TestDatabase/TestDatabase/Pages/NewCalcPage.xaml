@@ -4,18 +4,94 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TestDatabase.Pages.NewCalcPage"
     Title="Create New Restock Estimate"
-    BackgroundColor="AliceBlue">
-    
-    <ContentPage.Content>
+    BackgroundColor="AliceBlue"
+    >
 
-    <StackLayout VerticalOptions="Center"
+    <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" Margin="15">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Text="Please add the following information in order to get a new restock estimate for one item:"
+            FontSize="Large"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Grid.Row="2"
+
+            />
+         <Label Text="Product ID:"
+            FontSize="Medium"
+            Grid.Column="0"
+            Grid.ColumnSpan="1"
+            Grid.Row="3"
+            />
+
+        <Entry x:Name="prod_id_calc"
+            Placeholder="Enter a unique product ID"
+            Grid.Column="1"
+            Grid.ColumnSpan="1"
+            Grid.Row="3"
+            />
+
+        <Label Text="For how many days would you like to be stocked for?"
+                FontSize="Medium"
+                Grid.Column="0"
+                Grid.ColumnSpan="1"
+                Grid.Row="5"
+                />
+        <Entry x:Name="new_calc_days"
+            Placeholder="Number of days for stock"
+            Grid.Column="1"
+            Grid.ColumnSpan="1"
+            Grid.Row="5"
+            />
+
+        <Button x:Name="new_restock_calc_btn"
+                Text="Get estimated restock"
+                Grid.Column="1"
+                Grid.Row="7"
+                Clicked="new_restock_calc_btn_Clicked"
+                />
+
+        <Label Text=" Estimated Restock amount is: "
+            Grid.Column="0"
+            Grid.Row="8"
+            FontSize="Medium"
+               />
+        
+
+    </Grid>
+
+
+    <!--<StackLayout VerticalOptions="Center"
                  HorizontalOptions="Center">
+
+        
         <Label Text="Please add the following information in order to get a new restock estimate for one item:"
                 FontSize="Medium"
                 />
 
         <Entry x:Name="prod_id_calc"
                Placeholder="Product ID"
+               Grid.Column="2"
+               Grid.ColumnSpan="1"
                />
 
         <Button Text="Go back to Functions Page"
@@ -25,8 +101,7 @@
                 />
          
 
-    </StackLayout>
+    </StackLayout>-->
 
 
-    </ContentPage.Content>
 </ContentPage>
