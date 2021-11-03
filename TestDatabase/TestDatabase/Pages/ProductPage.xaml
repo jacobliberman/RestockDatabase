@@ -3,9 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TestDatabase.ProductPage"
     Padding="0,20"
-    Title="Product">
+    Title="Product"
+    BackgroundColor="AliceBlue"
+    >
 
-    <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" BackgroundColor="Orange">
+    <Grid Padding="5" RowSpacing="1" ColumnSpacing="1">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

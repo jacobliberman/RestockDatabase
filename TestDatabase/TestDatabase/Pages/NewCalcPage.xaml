@@ -2,14 +2,21 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="TestDatabase.Pages.NewCalcPage">
+    x:Class="TestDatabase.Pages.NewCalcPage"
+    Title="Create New Restock Estimate"
+    BackgroundColor="AliceBlue">
+    
     <ContentPage.Content>
 
     <StackLayout VerticalOptions="Center"
                  HorizontalOptions="Center">
-        <Label Text="Please add the following information in order to create a new Calculation:"
+        <Label Text="Please add the following information in order to get a new restock estimate for one item:"
                 FontSize="Medium"
                 />
+
+        <Entry x:Name="prod_id_calc"
+               Placeholder="Product ID"
+               />
 
         <Button Text="Go back to Functions Page"
                 BackgroundColor="LightGray"

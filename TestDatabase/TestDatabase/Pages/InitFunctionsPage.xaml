@@ -3,11 +3,11 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TestDatabase.Pages.InitFunctionsPage"
-    Title="FunctionsPage">
+    Title="FunctionsPage"
+    BackgroundColor="AliceBlue">
 
     <StackLayout VerticalOptions="Center"
                  HorizontalOptions="Center"
-                 BackgroundColor="AliceBlue"
                  >
 
     <Label Text="What do you want to do today?"
@@ -20,18 +20,21 @@
             Text="Create New Calculation"
             FontSize="Medium"
             Clicked="BtnNewCalcPg_Clicked"
+            VerticalOptions="Center"
             />
 
     <Button x:Name="BtnToUpdatePg"
             Text="Update or Add to Inventory"
             FontSize="Medium"
             Clicked="BtnToUpdatePg_Clicked"
+            VerticalOptions="Center"
             />
 
     <Button x:Name="BtnViewPrevCalculation"
             Text="View Previous Calculation"
             FontSize="Medium"
             Clicked="BtnViewPrevCalculation_Clicked"
+            VerticalOptions="Center"
              />
    
 
