@@ -3,60 +3,95 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TestDatabase.ProductPage"
     Padding="0,20"
-    Title="Product">
+    Title="Add Products"
+    BackgroundColor="AliceBlue"
+    >
 
-    <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" BackgroundColor="Orange">
+    <Grid Padding="5" RowSpacing="15" ColumnSpacing="1" Margin="40">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+
+        <Label Text="How would you like to add a product?"
+               Grid.Column="0"
+               Grid.Row="1"
+               BackgroundColor="AliceBlue"
+               FontSize="Title"
+               />
+        
+        <Label Text="Option 1: Use a CSV File"
+               Grid.Row="2"/>
+
+
         <Button x:Name="uploadFile" 
                 Text="Upload CSV File"
-                Grid.ColumnSpan="3"
+                Grid.Column = "2"
+                Grid.Row="2"
                 Clicked="OnFileUploadButtonClicked" />
 
-        <Button x:Name="deleteAll"
-                Text="Delete All Entries"
-                Clicked="OnDeleteAllButtonClicked" /> 
+
+        <Label Text="Option 2: Manually enter data"
+               Grid.Row="3"/>
 
         <Entry x:Name="newProduct"
-           Placeholder="Enter name" 
-               Grid.Row="1"/>
+        Placeholder="Enter name" 
+               Grid.Column="3"
+               Grid.Row="4"/>
+
+        
         <Entry x:Name="newID"
                Placeholder="Enter new product ID" 
                Grid.Column="1"
-               Grid.Row="1"/>
+               Grid.Row="4"/>
+
+
         <Entry x:Name="newquantity"
                Placeholder="Enter quantity" 
                Grid.Column="2"
-               Grid.Row="1"/>
+               Grid.Row="4"/>
 
-        <Button Text="Add Product"
-            Grid.Row="3" Grid.ColumnSpan="3"
+
+        <Button x:Name="deleteAll"
+                Text="Delete All Entries"
+                Clicked="OnDeleteAllButtonClicked"
+                Grid.Column="3"
+                Grid.Row="5"/> 
+
+    
+
+
+        <Button Text="Add Product."
+            Grid.Row="5" Grid.ColumnSpan="3"
             Clicked="OnNewButtonClicked" />
         
 
         <Label x:Name="statusMessage" Grid.ColumnSpan="3"
-           Grid.Row="4" />
+           Grid.Row="6" />
 
-        
-        
         <Button Text="Get All Products"
-            Grid.Row="5" Grid.ColumnSpan="3"
+            Grid.Row="5" 
             Clicked="OnGetButtonClicked" />
 
-        <Button x:Name="BtnWelcome"
+        <!--<Button x:Name="BtnWelcome"
                 Text="Go to Welcome"
                 Clicked="BtnWelcome_Clicked">
-        </Button>
+        </Button>-->
 
 
 

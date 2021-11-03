@@ -20,5 +20,12 @@ namespace TestDatabase.Pages
             await Navigation.PushAsync(new TestDatabase.Pages.InitFunctionsPage());
         }
 
+        private async void new_restock_calc_btn_Clicked(System.Object sender, System.EventArgs e)
+        {
+            //await App.ProductRepo.fetchRestock(prod_id_calc.Text);
+            // call the function fetch restock and print the estimated restock amount on screen
+            //print on Grid column 1 row 8
+
+        }
     }
 }

@@ -300,7 +300,7 @@ namespace TestDatabase
             {
                 Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
             }
-            else if (p.Quantity <= p.lastWeekStock)
+            else if (p.Quantity <= p.lastWeekStock)         //must try this cuz what if they didn't order last week and sold?
             {
                 Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
             }
