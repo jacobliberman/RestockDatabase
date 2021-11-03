@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace TestDatabase.Pages
 {
-    public partial class PrevCalculations : ContentPage
+    public partial class PrevCalculationsPage : ContentPage
     {
-        public PrevCalculations()
+        public PrevCalculationsPage()
         {
             InitializeComponent();
 
