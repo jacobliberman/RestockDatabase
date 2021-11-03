@@ -14,24 +14,25 @@
             FontAttributes="Bold"
             FontSize="Title"
             TextColor= "Black"
+            
             />
 
     <Button x:Name="BtnNewCalcPg"
-            Text="Create New Calculation"
+            Text="Create New Restock Estimate"
             FontSize="Medium"
             Clicked="BtnNewCalcPg_Clicked"
             VerticalOptions="Center"
             />
 
     <Button x:Name="BtnToUpdatePg"
-            Text="Update or Add to Inventory"
+            Text="Update Products or Suppliers"
             FontSize="Medium"
             Clicked="BtnToUpdatePg_Clicked"
             VerticalOptions="Center"
             />
 
     <Button x:Name="BtnViewPrevCalculation"
-            Text="View Previous Calculation"
+            Text="View Previous Restock Estimate"
             FontSize="Medium"
             Clicked="BtnViewPrevCalculation_Clicked"
             VerticalOptions="Center"

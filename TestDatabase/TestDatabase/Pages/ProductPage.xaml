@@ -7,10 +7,10 @@
     BackgroundColor="AliceBlue"
     >
 
-    <Grid Padding="5" RowSpacing="1" ColumnSpacing="1">
+    <Grid Padding="5" RowSpacing="15" ColumnSpacing="1" Margin="40">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -27,10 +27,12 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+
         <Label Text="How would you like to add a product?"
-               Grid.Column="1"
+               Grid.Column="0"
                Grid.Row="1"
                BackgroundColor="AliceBlue"
+               FontSize="Title"
                />
         
         <Label Text="Option 1: Use a CSV File"
