@@ -151,7 +151,7 @@ namespace TestDatabase
 
 
 
-                    result = await conn.InsertAsync(new Product { Name = name, numInStock = numInStock, prevSales= previousSales});
+                    result = await conn.InsertAsync(new Product { Name = name, Quantity = numInStock, lastWeekStock= previousSales});
 
                     StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
                }
@@ -277,67 +277,97 @@ namespace TestDatabase
           }
         public async void update(string name, int newQuantity)
         {
-            Product p = await conn.FindAsync<Product>(name);
-            int temp = p.Quantity;
-            p.Quantity = p.Quantity - newQuantity;
-            StatusMessage = string.Format("Amount sold in last week was: {0}", p.Quantity);
-            Console.WriteLine("Amount sold in last week was: {0}", p.Quantity);
-            if (p.Quantity < p.minStock + 5)
+            try
             {
-                StatusMessage = string.Format("NOTIFICATION: Low on {0} item", p.Name);
-                Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+                Product p = await conn.FindAsync<Product>(name);
+                int temp = p.Quantity;
+                p.Quantity = p.Quantity - newQuantity;
+                StatusMessage = string.Format("Amount sold in last week was: {0}", p.Quantity);
+                Console.WriteLine("Amount sold in last week was: {0}", p.Quantity);
+                if (p.Quantity < p.minStock + 5)
+                {
+                    StatusMessage = string.Format("NOTIFICATION: Low on {0} item", p.Name);
+                    Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+                }
+                else if (p.Quantity <= p.lastWeekStock)
+                {
+                    StatusMessage = string.Format("NOTIFICATION: Low on {0} item", p.Name);
+                    Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+                }
+                p.lastWeekStock = temp;
+                await conn.UpdateWithChildrenAsync(p);
             }
-            else if(p.Quantity <=p.lastWeekStock) {
-                StatusMessage = string.Format("NOTIFICATION: Low on {0} item", p.Name);
-                Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
             }
-            p.lastWeekStock = temp;
-            await conn.UpdateWithChildrenAsync(p);
 
         }
         public async void fetchRestock(string name)
         {
-            Product p = await conn.FindAsync<Product>(name);
-            StatusMessage = string.Format("Amount sold in last week was: {0}", p.Quantity);
-            Console.WriteLine("Amount sold in last week was: {0}", p.Quantity);
-            if (p.Quantity < p.minStock + 5)
+            try
             {
-                StatusMessage = string.Format("NOTIFICATION: Low on {0} item", p.Name);
-                Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+                Product p = await conn.FindAsync<Product>(name);
+
+                StatusMessage = string.Format("Amount sold in last week was: {0}", p.Quantity);
+                Console.WriteLine("Amount sold in last week was: {0}", p.Quantity);
+                if (p.Quantity < p.minStock + 5)
+                {
+                    StatusMessage = string.Format("NOTIFICATION: Low on {0} item", p.Name);
+                    Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+                }
+                else if (p.Quantity <= p.lastWeekStock)         //must try this cuz what if they didn't order last week and sold?
+                {
+                    StatusMessage = string.Format("NOTIFICATION: Low on {0} item", p.Name);
+                    Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+                }
             }
-            else if (p.Quantity <= p.lastWeekStock)         //must try this cuz what if they didn't order last week and sold?
+            catch (Exception ex)
             {
-                StatusMessage = string.Format("NOTIFICATION: Low on {0} item", p.Name);
-                Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
             }
         }
 
         public async void getCalculation(string name, int time)
         {
-            Product p = await conn.FindAsync<Product>(name);
-            if(p.lastWeekStock == 0)
+            try
             {
-                Console.WriteLine("Last weeks amount ordered: {0}", p.Quantity);
-                StatusMessage = string.Format("Last weeks amount ordered: {0}", p.Quantity - p.minStock * (time / 7));
-                Console.WriteLine("Last weeks amount ordered: {0}", p.Quantity - p.minStock );
+                Product p = await conn.FindAsync<Product>(name);
+
+                if (p.lastWeekStock == 0)
+                {
+                    Console.WriteLine("Last weeks amount ordered: {0}", p.Quantity);
+                    StatusMessage = string.Format("Last weeks amount ordered: {0}", p.Quantity - p.minStock * (time / 7));
+                    Console.WriteLine("Last weeks amount ordered: {0}", p.Quantity - p.minStock);
+                }
+                else
+                {
+                    StatusMessage = string.Format("Last weeks amount ordered: {0}", p.lastWeekStock - p.minStock * (time / 7));
+                    Console.WriteLine("Last weeks amount ordered: {0}", p.lastWeekStock - p.minStock);
+                }
             }
-            else
-            {
-                StatusMessage = string.Format("Last weeks amount ordered: {0}", p.lastWeekStock - p.minStock * (time / 7));
-                Console.WriteLine("Last weeks amount ordered: {0}", p.lastWeekStock-p.minStock );
+            catch (Exception ex)
+               {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
             }
-            
+
 
         }
 
         public async void updateCalculation(String name, int newminstock, int newlastweek)
         {
-            Product p = await conn.FindAsync<Product>(name);
+            try
+            {
+                Product p = await conn.FindAsync<Product>(name);
 
-            p.minStock = newminstock;
-            p.lastWeekStock = newlastweek;
-            await conn.UpdateWithChildrenAsync(p);
-
+                p.minStock = newminstock;
+                p.lastWeekStock = newlastweek;
+                await conn.UpdateWithChildrenAsync(p);
+            }
+            catch(Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+            }
         }
 
      }
