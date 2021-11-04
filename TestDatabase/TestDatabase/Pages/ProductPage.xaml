@@ -11,11 +11,12 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="100" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="80" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -38,7 +39,8 @@
                />
         
         <Label Text="Option 1: Use a CSV File"
-               Grid.Row="2"/>
+               Grid.Row="2"
+               FontSize="Medium"/>
 
 
         <Button x:Name="uploadFile" 
@@ -49,11 +51,14 @@
 
 
         <Label Text="Option 2: Manually enter data"
-               Grid.Row="3"/>
+               Grid.Row="3"
+               Grid.Column="0"
+               FontSize="Medium"
+               />
 
         <Entry x:Name="newProduct"
                Placeholder="Enter name" 
-               Grid.Column="1"
+               Grid.Column="0"
                Grid.ColumnSpan="2"
                Grid.Row="4"/>
 
@@ -67,7 +72,7 @@
 
         <Entry x:Name="newQuantity"
                Placeholder="Enter quantity" 
-               Grid.Column="1"
+               Grid.Column="0"
                Grid.Row="5"/>
 
 
@@ -75,44 +80,52 @@
                 Text="Delete All Entries"
                 Clicked="OnDeleteAllButtonClicked"
                 Grid.Column="1"
-                Grid.Row="6"/> 
+                Grid.Row="7"/> 
 
     
         <Button Text="Add Product."
                 Grid.Row="6"
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
+                Grid.RowSpan="1"
             Clicked="OnNewButtonClicked" />
-        
 
-        <Label x:Name="statusMessage" Grid.ColumnSpan="3"
-           Grid.Row="6" />
 
-        <Button Text="Get All Products"
+         <Button Text="Get All Products"
                 Grid.Row="6"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
+                 Grid.RowSpan="1"
             Clicked="OnGetButtonClicked" />
+
+
+        <Label x:Name="statusMessage" Grid.ColumnSpan="3"
+           Grid.Row="7" />
+
+       
 
         <!--<Button x:Name="BtnWelcome"
                 Text="Go to Welcome"
                 Clicked="BtnWelcome_Clicked">
         </Button>-->
 
-        <Label Text="Col 0"
+
+        <!--<Label Text="Col 0"
                Grid.Column="0"
                Grid.Row="8">
         </Label>
+
 
          <Label Text="Col 1"
                Grid.Column="1"
                 Grid.Row="8">
         </Label>
 
+
          <Label Text="Col 2"
                Grid.Column="2"
                 Grid.Row="8">
-        </Label>
+        </Label>-->
 
         
 
