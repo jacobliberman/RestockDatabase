@@ -280,12 +280,15 @@ namespace TestDatabase
             Product p = await conn.FindAsync<Product>(name);
             int temp = p.Quantity;
             p.Quantity = p.Quantity - newQuantity;
+            StatusMessage = string.Format("Amount sold in last week was: {0}", p.Quantity);
             Console.WriteLine("Amount sold in last week was: {0}", p.Quantity);
             if (p.Quantity < p.minStock + 5)
             {
+                StatusMessage = string.Format("NOTIFICATION: Low on {0} item", p.Name);
                 Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
             }
             else if(p.Quantity <=p.lastWeekStock) {
+                StatusMessage = string.Format("NOTIFICATION: Low on {0} item", p.Name);
                 Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
             }
             p.lastWeekStock = temp;
@@ -295,26 +298,42 @@ namespace TestDatabase
         public async void fetchRestock(string name)
         {
             Product p = await conn.FindAsync<Product>(name);
+            StatusMessage = string.Format("Amount sold in last week was: {0}", p.Quantity);
             Console.WriteLine("Amount sold in last week was: {0}", p.Quantity);
             if (p.Quantity < p.minStock + 5)
             {
+                StatusMessage = string.Format("NOTIFICATION: Low on {0} item", p.Name);
                 Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
             }
             else if (p.Quantity <= p.lastWeekStock)         //must try this cuz what if they didn't order last week and sold?
             {
+                StatusMessage = string.Format("NOTIFICATION: Low on {0} item", p.Name);
                 Console.WriteLine("NOTIFICATION: Low on {0} item", p.Name);
             }
         }
 
-        public async void getCalculation(string name)
+        public async void getCalculation(string name, int time)
         {
             Product p = await conn.FindAsync<Product>(name);
-            Console.WriteLine("Last weeks amount ordered: {0}", p.lastWeekStock-p.minStock);
+            if(p.lastWeekStock == 0)
+            {
+                Console.WriteLine("Last weeks amount ordered: {0}", p.Quantity);
+                StatusMessage = string.Format("Last weeks amount ordered: {0}", p.Quantity - p.minStock * (time / 7));
+                Console.WriteLine("Last weeks amount ordered: {0}", p.Quantity - p.minStock );
+            }
+            else
+            {
+                StatusMessage = string.Format("Last weeks amount ordered: {0}", p.lastWeekStock - p.minStock * (time / 7));
+                Console.WriteLine("Last weeks amount ordered: {0}", p.lastWeekStock-p.minStock );
+            }
+            
+
         }
 
         public async void updateCalculation(String name, int newminstock, int newlastweek)
         {
             Product p = await conn.FindAsync<Product>(name);
+
             p.minStock = newminstock;
             p.lastWeekStock = newlastweek;
             await conn.UpdateWithChildrenAsync(p);

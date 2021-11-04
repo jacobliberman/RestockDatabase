@@ -75,6 +75,8 @@
             Grid.Row="8"
             FontSize="Medium"
                />
+        <Label x:Name="statusMessage" Grid.ColumnSpan="5"
+           Grid.Row="8" />
         
 
     </Grid>
