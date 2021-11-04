@@ -26,8 +26,8 @@ namespace TestDatabase
           public async void OnNewButtonClicked(object sender, EventArgs args)
           {
                statusMessage.Text = "";
-
-               await App.ProductRepo.AddNewProduct(newProduct.Text);
+               Product pr = new Product() {Name=newProduct.Text,Quantity=Int32.Parse(newQuantity.Text)};
+               await App.ProductRepo.AddNewProduct(pr);
                //await App.ProductRepo.AddNewProduct(newProduct.Text, newDesc.Text, Convert.ToDouble(newPrice.Text));
 
                statusMessage.Text = App.ProductRepo.StatusMessage;
@@ -125,7 +125,7 @@ namespace TestDatabase
 
 
 
-                              csv.Context.RegisterClassMap<NewProductMap>();
+                              csv.Context.RegisterClassMap<InventoryImport>();
                               var records = csv.GetRecords<Product>();
 
                               foreach (Product prod in records)

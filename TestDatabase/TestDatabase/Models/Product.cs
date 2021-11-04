@@ -7,6 +7,7 @@ using CsvHelper.Expressions;
 
 using CsvHelper;
 using System;
+using System.Collections.Generic;
 using CsvHelper.Configuration.Attributes;
 
 namespace TestDatabase.Models
@@ -14,9 +15,9 @@ namespace TestDatabase.Models
      [Table("product")]
      public class Product
      {
-         
 
-          [PrimaryKey,MaxLength(250), Unique]
+
+          [PrimaryKey, MaxLength(250), Unique]
           public string Name { get; set; }
 
           [MaxLength(250)]
@@ -44,9 +45,9 @@ namespace TestDatabase.Models
 
           public int Key { get; set; }
 
-          
+
           public int numInStock { get; set; }
-          
+
           public int prevSales { get; set; }
 
           public int minStock { get; set; }
@@ -55,24 +56,18 @@ namespace TestDatabase.Models
 
           public string SaleHour { get; set; }
 
-         
+          public int numToRestock { get; set; }
+
+          //Needs to be set before new calculation is made 
+          public IDictionary<string, string> prevCalc = new Dictionary<string, string>() { { "currentStock", null }, { "minStock", null }, { "estRestock", null } };
+
           public string listOfProviders { get; set; }
+
 
           [ManyToMany(typeof(Supplies))]
           public List<Provider> Providers { get; set; } = new List<Provider>();
 
      }
-
-     public class ToStrArrayConverter : TypeConverter
-     {
-          public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
-          {
-               string[] allElements = text.Split(';');
-               return new List<String>(allElements);
-          }
-
-     }
-
 
      public class InventoryImport : ClassMap<Product>
      {
@@ -85,41 +80,38 @@ namespace TestDatabase.Models
                Map(m => m.Price).Name("Price");
                Map(m => m.TotalSale).Name("Total Sales");
                Map(m => m.Date).Name("Date");
+               Map(m => m.Quantity).Name("Quantity");
                Map(m => m.numInStock).Name("NumInStock");
                Map(m => m.prevSales).Name("PrevSales");
                Map(m => m.SaleHour).Name("SaleHour");
 
-               //TODO Check if provider exists, 
-               //    Add to provider list if exists
-               //    Add provider then add to list if not
+               
                Map(m => m.listOfProviders).Name("Provider(s)");
 
 
-               // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
 
 
           }
      }
 
 
-
      public class NewProductMap : ClassMap<Product>
      {
           public NewProductMap()
           {
-            Map(m => m.Name).Name("Name");
-            Map(m => m.Description).Name("Article Description");
-            Map(m => m.Category).Name("Category");
-            Map(m => m.Department).Name("Departament");
-            Map(m => m.Date).Name("Date of Sale");
-            Map(m => m.Quantity).Name("Sold Quantity");
-            Map(m => m.TotalSale).Name("Total Sales");
-            // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
-            Map(m => m.SaleHour).Name("Sale hour");
-            Map(m => m.minStock).Name("Minimum stock");
-            // Map(m => m.ProvidedBy).Name("Provider");
-        }
-    }
+               Map(m => m.Name).Name("Name");
+               Map(m => m.Description).Name("Description");
+               Map(m => m.Category).Name("Category");
+               Map(m => m.Department).Name("Departament");
+               Map(m => m.Date).Name("Date of Sale");
+               Map(m => m.Quantity).Name("Sold Quantity");
+               Map(m => m.TotalSale).Name("Total Sales");
+               // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
+               Map(m => m.SaleHour).Name("Sale hour");
+               Map(m => m.minStock).Name("Minimum stock");
+               // Map(m => m.ProvidedBy).Name("Provider");
+          }
+     }
 
 
 
@@ -134,7 +126,7 @@ namespace TestDatabase.Models
                Map(m => m.Date).Name("Date of Sale");
                Map(m => m.Quantity).Name("Sold Quantity");
                Map(m => m.TotalSale).Name("Total Sales");
-              // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
+               // Map(m => m.TotalWithoutTax).Name("Total (Without Tax)");
                Map(m => m.SaleHour).Name("Sale hour");
                //Map(m => m.ProvidedBy).Name("Provider");
           }

@@ -22,6 +22,11 @@ namespace TestDatabase
                conn.CreateTableAsync<Provider>();
           }
 
+          /// <summary>
+          /// Adds Provider to Provider Database
+          /// </summary>
+          /// <param name="p">Provider to add</param>
+          /// <returns></returns>
           public async Task AddNewProvider(Provider p)
           {
                int result = 0;
@@ -38,6 +43,11 @@ namespace TestDatabase
 
           }
 
+          /// <summary>
+          /// Adds Provider to Provider Database
+          /// </summary>
+          /// <param name="name">Name of provider to add</param>
+          /// <returns></returns>
           public async Task AddNewProvider(string name)
           {
                int result = 0;
@@ -49,14 +59,14 @@ namespace TestDatabase
 
                     try
                     {
-                         result = await conn.InsertAsync(new Provider { Name = name});
+                         result = await conn.InsertAsync(new Provider { Name = name });
                          StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
 
                     }
                     catch (SQLiteException ex)
                     {
-                         StatusMessage = string.Format("Failed to Add Provider. Provider with Name \"{0}\" already exists "); 
-                         StatusMessage = string.Format("Failed to Add Provider. Provider with Name \"{0}\" already exists "); 
+                         StatusMessage = string.Format("Failed to Add Provider. Provider with Name \"{0}\" already exists ");
+                         StatusMessage = string.Format("Failed to Add Provider. Provider with Name \"{0}\" already exists ");
                     }
                }
                catch (Exception ex)
@@ -67,10 +77,21 @@ namespace TestDatabase
 
           }
 
+          /// <summary>
+          /// Gets Provider with given name from Provider Database
+          /// </summary>
+          /// <param name="pname">Name of Provider</param>
+          /// <returns>Provider</returns>
           public async Task<Provider> GetProvider(string pname)
           {
                return await App.conn.GetAsync<Provider>(pname);
           }
+
+
+          /// <summary>
+          /// Gets list of all providers in Database
+          /// </summary>
+          /// <returns>List of Providers</returns>
           public async Task<List<Provider>> GetAllProviders()
           {
                try
@@ -84,6 +105,12 @@ namespace TestDatabase
                return new List<Provider>();
           }
 
+
+          /// <summary>
+          /// Gets list of all Products given Provider supplies
+          /// </summary>
+          /// <param name="prov">Provider</param>
+          /// <returns>List of Products</returns>
           public async Task<List<Product>> GetAllProducts(Provider prov)
           {
                Provider p = await conn.GetWithChildrenAsync<Provider>(prov.Name);
@@ -91,9 +118,13 @@ namespace TestDatabase
 
           }
 
+          /// <summary>
+          /// Deletes Given Provider 
+          /// </summary>
+          /// <param name="delete"></param>
           public async void DeleteProvider(Provider delete)
           {
-               
+
                delete.Products = null;
                await conn.UpdateWithChildrenAsync(delete);
                await conn.DeleteAsync(delete, recursive: true);
