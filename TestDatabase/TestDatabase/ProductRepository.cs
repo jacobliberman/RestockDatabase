@@ -19,16 +19,21 @@ namespace TestDatabase
           public ProductRepository(SQLiteAsyncConnection conn)
           {
                this.conn = conn;
-               
+
                // ***************** UNCOMMENT TO CLEAR TABLE ON REBOOT *********************
                //conn.DropTableAsync<Product>().Wait(); 
-               
-               
+
+
                conn.CreateTableAsync<Product>();
           }
 
 
 
+          /// <summary>
+          /// Adds new product to Product Database
+          /// </summary>
+          /// <param name="p">Product to be added</param>
+          /// <returns></returns>
           public async Task AddNewProduct(Product p)
           {
                int result = 0;
@@ -45,41 +50,36 @@ namespace TestDatabase
 
           }
 
-          public async Task AddNewProduct(string name, string desc, string cat, string dept, double price, int totalSale, int quan, string date, int numStock, int prevSales, string saleHour,string provs)
+          /// <summary>
+          /// Adds new product to Product Database
+          /// </summary>
+          /// <param name="name">Name of Product</param>
+          /// <param name="desc">Description of Product</param>
+          /// <param name="cat">Category of Product</param>
+          /// <param name="dept">Department of Product</param>
+          /// <param name="price">Price of Product</param>
+          /// <param name="totalSale">Total amount sold of Product</param>
+          /// <param name="quan">Quantity of Product</param>
+          /// <param name="date">Date of Product</param>
+          /// <param name="numStock">Number in Stock of Product</param>
+          /// <param name="prevSales">Previous sales of Product</param>
+          /// <param name="saleHour">Hour of sale of Product</param>
+          /// <param name="provs">Providers of Product</param>
+          /// <returns></returns>
+          public async Task AddNewProduct(string name, string desc, string cat, string dept, double price, int totalSale, int quan, string date, int numStock, int prevSales, string saleHour, string provs)
           {
                int result = 0;
                try
                {
-                    /*
-                    if (string.IsNullOrEmpty(name))
-                         throw new Exception("Valid name required");
-                    if (string.IsNullOrEmpty(desc))
-                         throw new Exception("Valid description required");
-                    if (string.IsNullOrEmpty(cat))
-                         throw new Exception("Valid category required");
-                    if (string.IsNullOrEmpty(dept))
-                         throw new Exception("Valid department required");
-                    if (double.IsNaN(price))
-                         throw new Exception("Valid price required");                              
-                    if (string.IsNullOrEmpty(date))
-                         throw new Exception("Valid date required");
-                    if (string.IsNullOrEmpty(saleHour))
-                         throw new Exception("Valid sale hour required");
-      */
-
-
-                    //Product newP = new Product { Name = name, Description = desc, Category = cat, Department = dept, Price = price, TotalSale = totalSale, Quantity = quan, Date = date, numInStock = numStock, prevSales = prevSales, SaleHour = saleHour, listOfProviders = provs };
-                    //result = await conn.InsertAsync(newP);
-
 
                     result = await conn.InsertAsync(new Product { Name = name, Description = desc, Category = cat, Department = dept, Price = price, TotalSale = totalSale, Quantity = quan, Date = date, numInStock = numStock, prevSales = prevSales, SaleHour = saleHour, listOfProviders = provs });
                     StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
-                    //return newP;
+
                }
                catch (Exception ex)
                {
-                   StatusMessage = string.Format("Failed to add {0}. Error: {1}", name, ex.Message);
-                    //return null;
+                    StatusMessage = string.Format("Failed to add {0}. Error: {1}", name, ex.Message);
+
                }
 
           }
@@ -117,6 +117,11 @@ namespace TestDatabase
 
           }
 
+          /// <summary>
+          /// Adds new product to Product Database
+          /// </summary>
+          /// <param name="name">Name of Product</param>
+          /// <returns></returns>
           public async Task AddNewProduct(string name)
           {
                int result = 0;
@@ -125,10 +130,10 @@ namespace TestDatabase
                     //basic validation to ensure a name was entered
                     if (string.IsNullOrEmpty(name))
                          throw new Exception("Valid name required");
-             
 
 
-                    result = await conn.InsertAsync(new Product { Name = name});
+
+                    result = await conn.InsertAsync(new Product { Name = name });
 
                     StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
                }
@@ -139,6 +144,13 @@ namespace TestDatabase
 
           }
 
+          /// <summary>
+          /// Adds new product to Product Database
+          /// </summary>
+          /// <param name="name">Name of Product</param>
+          /// <param name="numInStock">Number in stock of Product</param>
+          /// <param name="previousSales">Previous sales of Product</param>
+          /// <returns></returns>
           public async Task AddNewProduct(string name, int numInStock, int previousSales)
           {
                int result = 0;
@@ -147,11 +159,12 @@ namespace TestDatabase
                     //basic validation to ensure a name was entered
                     if (string.IsNullOrEmpty(name))
                          throw new Exception("Valid name required");
-                    
+
 
 
 
                     result = await conn.InsertAsync(new Product { Name = name, Quantity = numInStock, lastWeekStock= previousSales});
+                    result = await conn.InsertAsync(new Product { Name = name, numInStock = numInStock, prevSales = previousSales });
 
                     StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
                }
@@ -166,22 +179,23 @@ namespace TestDatabase
           /// <summary>
           /// Gets List of all providers of a product
           /// </summary>
-          /// <param name="prod"></param>
+          /// <param name="prod">Product</param>
           /// <returns>List of Providers</returns>
           public async Task<List<Provider>> GetAllProviders(Product prod)
-          {             
-                    Product p = await conn.GetWithChildrenAsync<Product>(prod.Name);
-                    return p.Providers;
-                            
+          {
+               Product p = await conn.GetWithChildrenAsync<Product>(prod.Name);
+               return p.Providers;
+
           }
-         
+
           /// <summary>
           /// Adds Provider to Product and vice-versa
           /// </summary>
-          /// <param name="prod"></param>
-          /// <param name="prov"></param>
+          /// <param name="prod">Product to add to provider</param>
+          /// <param name="prov">Provider to add to product</param>
           /// <returns></returns>
-          public async Task AddProvider(Product prod, Provider prov){
+          public async Task AddProvider(Product prod, Provider prov)
+          {
                try
                {
                     try
@@ -194,8 +208,8 @@ namespace TestDatabase
                     {
                          StatusMessage = string.Format("Could not add provider");
                     }
-                    
-                   
+
+
                }
                catch (Exception ex)
                {
@@ -205,6 +219,11 @@ namespace TestDatabase
 
 
 
+          /// <summary>
+          /// Gets product from Product Database with given name
+          /// </summary>
+          /// <param name="pname">Name of Product</param>
+          /// <returns>Product</returns>
           public async Task<Product> GetProduct(string pname)
           {
                return await App.conn.GetAsync<Product>(pname);
@@ -273,9 +292,9 @@ namespace TestDatabase
                {
                     Console.WriteLine("Could not add list of providers. {0}", ex);
                }
-               
+
           }
-        public async void update(string name, int newQuantity)
+           public async void update(string name, int newQuantity)
         {
             try
             {

@@ -65,7 +65,7 @@
                Grid.Row="4"/>
 
 
-        <Entry x:Name="newquantity"
+        <Entry x:Name="newQuantity"
                Placeholder="Enter quantity" 
                Grid.Column="1"
                Grid.Row="5"/>
@@ -123,7 +123,7 @@
                     <ViewCell Height="30">
                         <Grid Padding="5">
                             <Label Text="{Binding Name}" />
-                            <Label Grid.Column="1" Text="{Binding Description}" />
+                            <Label Grid.Column="1" Text="{Binding Quantity}" />
                             <Label Grid.Column="2" Text="{Binding Providers}" HorizontalTextAlignment="End" />
                         </Grid>
                     </ViewCell>
