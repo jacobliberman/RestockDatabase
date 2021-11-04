@@ -355,14 +355,14 @@ namespace TestDatabase
 
                 if (p.lastWeekStock == 0)
                 {
-                    Console.WriteLine("Last weeks amount ordered: {0}", p.Quantity);
+                    //Console.WriteLine("Last weeks amount ordered: {0}", p.Quantity);
                     StatusMessage = string.Format("Last weeks amount ordered: {0}", p.Quantity - p.minStock * (time / 7));
-                    Console.WriteLine("Last weeks amount ordered: {0}", p.Quantity - p.minStock);
+                    //Console.WriteLine("Last weeks amount ordered: {0}", p.Quantity - p.minStock);
                 }
                 else
                 {
                     StatusMessage = string.Format("Last weeks amount ordered: {0}", p.lastWeekStock - p.minStock * (time / 7));
-                    Console.WriteLine("Last weeks amount ordered: {0}", p.lastWeekStock - p.minStock);
+                    //Console.WriteLine("Last weeks amount ordered: {0}", p.lastWeekStock - p.minStock * (time / 7));
                 }
             }
             catch (Exception ex)

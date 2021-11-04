@@ -28,7 +28,8 @@ namespace TestDatabase.Pages
         private async void new_restock_calc_btn_Clicked(System.Object sender, System.EventArgs e)
         {
             statusMessage.Text = "";
-            //App.ProductRepo.fetchRestock(prod_id_calc.Text);
+            App.ProductRepo.fetchRestock(prod_id_calc.Text);
+            statusMessage.Text = App.ProductRepo.StatusMessage;
             // call the function fetch restock and print the estimated restock amount on screen
             //print on Grid column 1 row 8
             //Console.WriteLine("{0}", new_calc_days.Text);
