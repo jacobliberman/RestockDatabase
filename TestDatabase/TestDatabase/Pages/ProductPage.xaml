@@ -7,9 +7,10 @@
     BackgroundColor="AliceBlue"
     >
 
-    <Grid Padding="5" RowSpacing="15" ColumnSpacing="1" Margin="40">
+    <Grid Padding="5" RowSpacing="15" ColumnSpacing="1" Margin="50">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -30,6 +31,7 @@
 
         <Label Text="How would you like to add a product?"
                Grid.Column="0"
+               Grid.ColumnSpan="3"
                Grid.Row="1"
                BackgroundColor="AliceBlue"
                FontSize="Title"
@@ -41,7 +43,7 @@
 
         <Button x:Name="uploadFile" 
                 Text="Upload CSV File"
-                Grid.Column = "2"
+                Grid.Column = "1"
                 Grid.Row="2"
                 Clicked="OnFileUploadButtonClicked" />
 
@@ -50,34 +52,36 @@
                Grid.Row="3"/>
 
         <Entry x:Name="newProduct"
-        Placeholder="Enter name" 
-               Grid.Column="3"
+               Placeholder="Enter name" 
+               Grid.Column="1"
+               Grid.ColumnSpan="2"
                Grid.Row="4"/>
 
         
         <Entry x:Name="newID"
                Placeholder="Enter new product ID" 
-               Grid.Column="1"
+               Grid.Column="2"
+               Grid.ColumnSpan="2"
                Grid.Row="4"/>
 
 
         <Entry x:Name="newquantity"
                Placeholder="Enter quantity" 
-               Grid.Column="2"
-               Grid.Row="4"/>
+               Grid.Column="1"
+               Grid.Row="5"/>
 
 
         <Button x:Name="deleteAll"
                 Text="Delete All Entries"
                 Clicked="OnDeleteAllButtonClicked"
-                Grid.Column="3"
-                Grid.Row="5"/> 
+                Grid.Column="1"
+                Grid.Row="6"/> 
 
     
-
-
         <Button Text="Add Product."
-            Grid.Row="5" Grid.ColumnSpan="3"
+                Grid.Row="6"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
             Clicked="OnNewButtonClicked" />
         
 
@@ -85,7 +89,9 @@
            Grid.Row="6" />
 
         <Button Text="Get All Products"
-            Grid.Row="5" 
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
             Clicked="OnGetButtonClicked" />
 
         <!--<Button x:Name="BtnWelcome"
@@ -93,7 +99,22 @@
                 Clicked="BtnWelcome_Clicked">
         </Button>-->
 
+        <Label Text="Col 0"
+               Grid.Column="0"
+               Grid.Row="8">
+        </Label>
 
+         <Label Text="Col 1"
+               Grid.Column="1"
+                Grid.Row="8">
+        </Label>
+
+         <Label Text="Col 2"
+               Grid.Column="2"
+                Grid.Row="8">
+        </Label>
+
+        
 
         <ListView x:Name="productsList" Grid.ColumnSpan="3"
               Grid.Row="6">
