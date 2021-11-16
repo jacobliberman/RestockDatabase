@@ -25,21 +25,43 @@
                    HorizontalOptions="CenterAndExpand"
                    BackgroundColor="AliceBlue"
                    FontSize="Title"
-                   Grid.Row="0"
+                   Grid.Row="1"
                    />
+            <Button Text="Get Last Calculation"
+                    Clicked="getPreviousRestock"
+                    Grid.Row="1"
+                    Grid.Column="2"/>
+
             <Label Text="Last calculation Dates:"
                    HorizontalOptions="Start"
                    FontSize="24"
                    TextColor="DarkSlateBlue"
-                   Grid.Row="1"
+                   Grid.Row="2"
 
                    />
             <Label Text="Last calculation Duration (in days)"
                    HorizontalOptions="Start"
                    FontSize="Medium"
-                   Grid.Row="2"
+                   Grid.Row="3"
                    />
-        
+
+            <ListView x:Name="productsList" Grid.ColumnSpan="3"
+              Grid.Row="4">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="30">
+                            <Grid Padding="5">
+                                <Label Text="{Binding Name}" />
+                                <Label Grid.Column="1" Text="{Binding numInStock}" />
+                                <Label Grid.Column="2" Text="{Binding minStock}" /> 
+                                <Label Grid.Column="3" Text="{Binding numToRestock}" HorizontalTextAlignment="End" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
         </Grid>
 
 

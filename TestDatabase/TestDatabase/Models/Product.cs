@@ -59,7 +59,7 @@ namespace TestDatabase.Models
           public int numToRestock { get; set; }
 
           //Needs to be set before new calculation is made 
-          public IDictionary<string, string> prevCalc = new Dictionary<string, string>() { { "currentStock", null }, { "minStock", null }, { "estRestock", null } };
+          public IDictionary<string, string> prevCalc = new Dictionary<string, string>() { {"name",null}, { "currentStock", null }, { "minStock", null }, { "estRestock", null } };
 
           public string listOfProviders { get; set; }
 
