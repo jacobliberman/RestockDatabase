@@ -7,42 +7,41 @@
     BackgroundColor="AliceBlue">
     <ContentPage.Content>
        
-        <Grid Margin="40" RowSpacing="2" >
+        <Grid Margin="50" RowSpacing="15" ColumnSpacing="15" BackgroundColor="AliceBlue">
 
             <Grid.RowDefinitions>
-            <RowDefinition Height="15" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
 
 
             <Label Text="Last Calculation"
-                   HorizontalOptions="CenterAndExpand"
                    BackgroundColor="AliceBlue"
                    FontSize="Title"
                    Grid.Row="0"
+                   Grid.Column="0"
                    />
-            <Label Text="Last calculation Dates:"
-                   HorizontalOptions="Start"
+
+            <!--<Label Text="Last calculation Dates:"
                    FontSize="24"
                    TextColor="DarkSlateBlue"
                    Grid.Row="1"
+                  />
 
-                   />
             <Label Text="Last calculation Duration (in days)"
-                   HorizontalOptions="Start"
                    FontSize="Medium"
                    Grid.Row="2"
-                   />
+                   Grid.Column="0"
+                   />-->
         
         </Grid>
-
-
 
     </ContentPage.Content>
 </ContentPage>

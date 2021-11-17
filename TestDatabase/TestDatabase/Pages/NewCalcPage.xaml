@@ -7,11 +7,11 @@
     BackgroundColor="AliceBlue"
     >
 
-    <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" Margin="15">
+    <Grid Padding="5" RowSpacing="15" ColumnSpacing="15" Margin="50">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -57,7 +57,7 @@
                 Grid.Row="5"
                 />
         <Entry x:Name="new_calc_days"
-            Placeholder="Number of days for stock"
+            Placeholder="Enter number of days:"
             Grid.Column="1"
             Grid.ColumnSpan="1"
             Grid.Row="5"

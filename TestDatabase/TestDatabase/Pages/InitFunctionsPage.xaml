@@ -3,7 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TestDatabase.Pages.InitFunctionsPage"
-    Title="FunctionsPage"
+    Title="Main Functions"
     BackgroundColor="AliceBlue">
 
     <StackLayout VerticalOptions="Center"
@@ -29,6 +29,7 @@
             FontSize="Medium"
             Clicked="BtnToUpdatePg_Clicked"
             VerticalOptions="Center"
+            BorderWidth="5"
             />
 
     <Button x:Name="BtnViewPrevCalculation"
