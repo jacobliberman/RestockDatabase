@@ -8,7 +8,7 @@ using TestDatabase.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace TestDatabase
+namespace TestDatabase.Pages
 {
      public partial class ProductPage : ContentPage
      {
