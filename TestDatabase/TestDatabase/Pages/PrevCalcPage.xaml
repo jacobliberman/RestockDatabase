@@ -29,7 +29,7 @@
                    Grid.Column="0"
                    />
 
-            <!--<Label Text="Last calculation Dates:"
+            <Label Text="Last calculation Dates:"
                    FontSize="24"
                    TextColor="DarkSlateBlue"
                    Grid.Row="1"
@@ -39,7 +39,7 @@
                    FontSize="Medium"
                    Grid.Row="2"
                    Grid.Column="0"
-                   />-->
+                   />
         
         </Grid>
 
