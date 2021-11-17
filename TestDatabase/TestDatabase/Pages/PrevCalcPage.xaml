@@ -7,17 +7,23 @@
     BackgroundColor="AliceBlue">
     <ContentPage.Content>
 
-        <Grid Margin="40" RowSpacing="2" >
-
-            
-            <Button Text="Get Last Calculation"
+        <StackLayout>
+        
+           
+           
+                <Button Text="Get Last Calculation"
                     Clicked="getPreviousRestock"
-                    Grid.Row="1"
-                    Grid.Column="2"/>
+                    />
+            <Grid >
+                <Label Grid.Column="0" Text="Product"/>
+                <Label Grid.Column="1" Text="Num in Stock" />
+                <Label Grid.Column="2" Text="Minimum Stock"/>
+                <Label Grid.Column="3" Text="Num to Restock"  />
+            </Grid>
 
 
-        <ListView x:Name="productsList" Grid.ColumnSpan="3"
-              Grid.Row="4">
+            <ListView x:Name="productsList" >
+              
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell Height="30">
@@ -31,6 +37,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        </Grid>
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
