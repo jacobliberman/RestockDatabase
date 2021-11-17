@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="TestDatabase.ProductPage"
+    x:Class="TestDatabase.Pages.ProductPage"
     Padding="0,20"
     Title="Add Products"
     BackgroundColor="AliceBlue"
-    >
+  >
 
     <Grid Padding="5" RowSpacing="15" ColumnSpacing="1" Margin="50">
 
@@ -34,7 +34,7 @@
                Grid.Column="0"
                Grid.ColumnSpan="3"
                Grid.Row="1"
-               BackgroundColor="AliceBlue"
+               
                FontSize="Title"
                />
         
@@ -48,7 +48,7 @@
                 Grid.Column = "1"
                 Grid.Row="2"
                 Clicked="OnFileUploadButtonClicked"
-                Background=""/>
+                />
 
 
         <Label Text="Option 2: Manually enter data"
@@ -77,12 +77,13 @@
                Grid.Row="5"/>
 
 
+        <!--
         <Button x:Name="deleteAll"
                 Text="Delete All Entries"
                 Clicked="OnDeleteAllButtonClicked"
                 Grid.Column="1"
                 Grid.Row="7"/> 
-
+        -->
     
         <Button Text="Add Product."
                 Grid.Row="6"
@@ -131,7 +132,7 @@
         
 
         <ListView x:Name="productsList" Grid.ColumnSpan="3"
-              Grid.Row="6">
+              Grid.Row="7">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell Height="30">
