@@ -47,7 +47,8 @@
                 Text="Upload CSV File"
                 Grid.Column = "1"
                 Grid.Row="2"
-                Clicked="OnFileUploadButtonClicked" />
+                Clicked="OnFileUploadButtonClicked"
+                Background=""/>
 
 
         <Label Text="Option 2: Manually enter data"

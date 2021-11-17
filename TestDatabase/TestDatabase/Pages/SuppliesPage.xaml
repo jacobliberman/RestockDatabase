@@ -7,14 +7,14 @@
     <ContentPage.Content>
         <StackLayout>
             <Entry x:Name="productId"
-           Placeholder="Enter Product Id" />
+           Placeholder="Enter Product ID" />
 
             <Entry x:Name="providerId"
-               Placeholder="Enter Provider Id" />
+               Placeholder="Enter Provider ID" />
 
 
             <Button x:Name="addRelation"
-                Text="Add Supplies"
+                Text="Add Provider-Product Relation"
                 Clicked="OnNewButtonClicked" />
 
 
@@ -22,7 +22,7 @@
 
             <Label x:Name="statusMessage" />
 
-            <Button Text="Get Suppliers of Product"
+            <Button Text="Get Providers of Product"
                     Clicked="OnGetSuppliersButtonClicked" />
 
             <ListView x:Name="suppliersList">
@@ -41,7 +41,7 @@
                     Clicked="OnSuppliesGetButtonClicked" />
 
             <Entry x:Name="searchProductId"
-                   Placeholder="Enter product Id to search for"/>
+                   Placeholder="Enter Product ID to search for"/>
             <Button Text="Search Supplies"
                     Clicked="OnSearchButtonClicked"/>
             

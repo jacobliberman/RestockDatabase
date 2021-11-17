@@ -23,10 +23,10 @@ namespace TestDatabase.Pages
 
         }
 
-        private async void BtnUpdateProvider_Clicked(System.Object sender, System.EventArgs e)
-        {
-            await Navigation.PushAsync(new ProviderPage());
-        }
+        //private async void BtnUpdateProvider_Clicked(System.Object sender, System.EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new ProviderPage());
+        //}
 
 
     }

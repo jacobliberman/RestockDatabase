@@ -3,9 +3,89 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestDatabase.ProviderPage"
              BackgroundColor="AliceBlue"
-             Title="Provider">
+             Title="Provider-Products Relation">
     <ContentPage.Content>
-        <StackLayout>
+
+        <Grid Margin="50" RowSpacing="15">
+            <Grid.ColumnDefinitions>
+               
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                 <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+
+            
+            <Label x:Name="uniqueMessage"
+                Text="Reminder: All provider ID's must be unique."
+                Grid.Column="0"
+                Grid.Row="2"
+                />
+
+            <Label Text="Add a provider"
+                Grid.Column="0"
+                Grid.Row="1"
+                   />
+
+            <Entry x:Name="newProviderName"
+                Placeholder="Enter Provider Name"
+                Grid.Column="0"
+                Grid.Row="2"
+                />
+
+            <Entry x:Name="newProviderId"
+                Placeholder="Enter Provider ID"
+                Grid.Column="1"
+                Grid.Row="2"
+                />
+            <Button x:Name="addProvider"
+                Text="Add Provider"
+                Clicked="OnNewButtonClicked"
+                Grid.Column="0"
+                Grid.Row="3"
+                />
+
+
+            <Button Text="Display All Providers"
+                Clicked="OnGetButtonClicked"
+                Grid.Column="0"
+                Grid.Row="4"
+                Grid.ColumnSpan="3"
+                    />
+
+             <Label x:Name="statusMessage" />
+
+
+            <ListView x:Name="providerList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="30">
+                            <Grid Padding="5">
+                                <Label Text="{Binding Name}" />
+                            <Label Grid.Column="1" Text="{Binding ID}"  HorizontalTextAlignment="End" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+
+        </Grid>
+
+        <!--<StackLayout>
 
             
 
@@ -48,6 +128,6 @@
             </ListView>
 
 
-        </StackLayout>
+        </StackLayout>-->
     </ContentPage.Content>
 </ContentPage>
