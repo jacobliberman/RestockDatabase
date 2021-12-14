@@ -36,12 +36,20 @@ namespace TestDatabase
           public async void OnGetButtonClicked(object sender, EventArgs args)
           {
                statusMessage.Text = "";
-
+            try
+            {
                List<Provider> providers = await App.ProviderRepo.GetAllProviders();
                providerList.ItemsSource = providers;
-               
+            }
+            catch (Exception ex)
+            {
+                 statusMessage.Text = $"Failed to retrieve data. {ex.Message}";
+            }
 
-          }
+
+
+
+        }
           private async void OnFileUploadButtonClicked(object sender, EventArgs args)
           {
                statusMessage.Text = "";

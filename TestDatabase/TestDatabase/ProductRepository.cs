@@ -183,10 +183,19 @@ namespace TestDatabase
           /// <returns>List of Providers</returns>
           public async Task<List<Provider>> GetAllProviders(Product prod)
           {
+            try
+            {
                Product p = await conn.GetWithChildrenAsync<Product>(prod.Name);
                return p.Providers;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to add {0}. Error: {1}", prod.Name, ex.Message);
+            }
+            return null;
 
-          }
+
+        }
 
           /// <summary>
           /// Adds Provider to Product and vice-versa
@@ -226,8 +235,17 @@ namespace TestDatabase
           /// <returns>Product</returns>
           public async Task<Product> GetProduct(string pname)
           {
-               return await App.conn.GetAsync<Product>(pname);
-          }
+            try
+            {
+                return await App.conn.GetAsync<Product>(pname);
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to add {0}. Error: {1}", pname, ex.Message);
+            }
+            return null;
+
+        }
 
           /// <summary>
           /// Gets list of all Products in database
@@ -253,10 +271,18 @@ namespace TestDatabase
           /// <param name="delete">Product to delete</param>
           public async void DeleteProduct(Product delete)
           {
-               delete.Providers = null;
+            delete.Providers = null;
+            try
+            {
                await conn.UpdateWithChildrenAsync(delete);
                await conn.DeleteAsync(delete, recursive: true);
-          }
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+            }
+
+        }
 
           public Task<int> ClearAllItems<T>()
           {

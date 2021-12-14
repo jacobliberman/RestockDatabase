@@ -84,8 +84,15 @@ namespace TestDatabase
           /// <returns>Provider</returns>
           public async Task<Provider> GetProvider(string pname)
           {
-               return await App.conn.GetAsync<Provider>(pname);
-          }
+            try
+            {
+                return await App.conn.GetAsync<Provider>(pname);
+            }catch(Exception ex)
+            {
+                StatusMessage = string.Format("Failed to add {0}. Error: {1}", pname, ex.Message);
+            }
+            return null;
+        }
 
 
           /// <summary>
@@ -113,10 +120,20 @@ namespace TestDatabase
           /// <returns>List of Products</returns>
           public async Task<List<Product>> GetAllProducts(Provider prov)
           {
-               Provider p = await conn.GetWithChildrenAsync<Provider>(prov.Name);
-               return p.Products;
+            Provider p;
+            try
+            {
+                p = await conn.GetWithChildrenAsync<Provider>(prov.Name);
+                return p.Products;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+            }
+            return null;
 
-          }
+
+        }
 
           /// <summary>
           /// Deletes Given Provider 
@@ -124,12 +141,19 @@ namespace TestDatabase
           /// <param name="delete"></param>
           public async void DeleteProvider(Provider delete)
           {
-
+            try
+            {
                delete.Products = null;
                await conn.UpdateWithChildrenAsync(delete);
                await conn.DeleteAsync(delete, recursive: true);
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+            }
 
-          }
+
+        }
 
           public Task<int> ClearAllProviders<T>()
           {
